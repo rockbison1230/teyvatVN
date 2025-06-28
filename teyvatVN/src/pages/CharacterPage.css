@@ -7,14 +7,14 @@
 
 .page-title {
   font-family: "Quattrocento", sans-serif;
-  font-size: 4rem;
+  font-size: 2rem;
   margin-bottom: 0.2rem;
   color: black;
 }
 
 .page-description {
   margin-bottom: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.1rem;
   color: black;
   max-width: 100%;
 }
@@ -99,6 +99,7 @@
   font-size: 1.2rem;
   cursor: pointer;
   margin-left: 0.25rem;
+  color: #c7c3c3;
 }
 
 .character-grid {
@@ -125,7 +126,7 @@
 
 
 .character-card.selected {
-  box-shadow: 0 0 0 3px #6366f1;
+  box-shadow: 0 0 0 3px #74A6ED;
 }
 
 .character-card img {
@@ -157,4 +158,8 @@
   color: #1c1b3a;
   font-weight: bold;
   cursor: pointer;
+}
+
+.continue span:hover {
+  color: #74A6ED;
 }
