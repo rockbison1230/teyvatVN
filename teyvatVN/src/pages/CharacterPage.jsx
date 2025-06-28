@@ -20,7 +20,6 @@ import rosariaImg from "../assets/character-sprites/rosaria.webp";
 import sucroseImg from "../assets/character-sprites/sucrose.png";
 import ventiImg from "../assets/character-sprites/venti.webp";
 
-const [modalCharacter, setModalCharacter] = useState(null);
 
 const handleOpenModal = (character) => {
   setModalCharacter(character);
@@ -30,17 +29,49 @@ const handleCloseModal = () => {
   setModalCharacter(null);
 };
 
-
 const allCharacters = [
-  { name: "Albedo", image: albedoImg },
-  { name: "Amber", image: amberImg },
-  { name: "Barbara", image: barbaraImg },
+  { name: "Albedo",
+     image: albedoImg,
+    element: "Geo",
+     personality: "Curious, Calm",
+     likes: ["Sucrose", "Mona"],
+     dislikes: ["Venti (too unpredicatable for his tastes)"],
+     quote: "Oh? My latest experiments show promising results."},
+
+  { name: "Amber",
+     image: amberImg,
+    element: "Pyro",
+     personality: "Cheerful, Brave",
+     likes: ["Jean", "Kaeya"],
+     dislikes: ["Rosaria (conflicting attitudes)"],
+     quote: "When I'm teaching you to glide, I feel like I can go even faster than usual..."},
+  
+     { name: "Barbara", image: barbaraImg },
   { name: "Dahlia", image: dahliaImg },
-  { name: "Diluc", image: dilucImg },
-  { name: "Eula", image: eulaImg },
+  { name: "Diluc",
+     image: dilucImg,
+     element: "Pyro",
+     personality: "Stoic, Protective",
+     likes: ["Kaeya", "Lisa", "Jean"],
+     dislikes: ["Kaeya (it's complicated)"],
+     quote: "In the dark, I see the truth."
+    },
+  { name: "Eula", 
+    image: eulaImg,
+    element: "Cryo",
+    personality: "Blunt, Loyal",
+    likes: ["Kaeya"],
+    dislikes: ["Diluc"],
+    quote: "My thanks...and apology.",
+  },
   { name: "Fischl", image: fischlImg },
   { name: "Jean", 
-    image: jeanImg },
+    image: jeanImg,
+  element: "Anemo",
+     personality: "Kind, Dedicated",
+     likes: ["Lisa", "Amber"],
+     dislikes: ["Diluc (sometimes)", "Barbara (sibling rivalry)"],
+     quote: "I must protect everyone." },
   { 
   name: "Kaeya",
   image: kaeyaImg,
@@ -61,10 +92,19 @@ const allCharacters = [
 ];
 
 function CharacterPage() {
+  const [modalCharacter, setModalCharacter] = useState(null);
   const [selected, setSelected] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { setSelectedCharacters } = useCharacters();
+
+  const handleOpenModal = (character) => {
+    setModalCharacter(character);
+  };
+
+  const handleCloseModal = () => {
+    setModalCharacter(null);
+  };
 
   const handleToggleSelection = (character) => {
     if (selected.find((c) => c.name === character.name)) {
@@ -79,6 +119,7 @@ function CharacterPage() {
   const handleClearSearch = () => setSearchTerm("");
   const handleDeselect = (name) =>
     setSelected((prev) => prev.filter((c) => c.name !== name));
+
   const handleStartOver = () => setSelected([]);
 
   const handleContinue = () => {
@@ -137,7 +178,6 @@ function CharacterPage() {
             key={char.name}
             className={`character-card ${selected.find((c) => c.name === char.name) ? "selected" : ""}`}
             onClick={() => handleOpenModal(char)}
-
           >
             <img src={char.image} alt={char.name} />
             <div className="character-name">{char.name}</div>
@@ -145,21 +185,32 @@ function CharacterPage() {
         ))}
       </div>
 
+      {/* Modal */}
       {modalCharacter && (
-  <div className="modal-overlay" onClick={handleCloseModal}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <button className="modal-close" onClick={handleCloseModal}>×</button>
-      <h2 className="modal-name">{modalCharacter.name}</h2>
-      {modalCharacter.quote && <p className="modal-quote">“{modalCharacter.quote}”</p>}
-      {modalCharacter.element && <p><strong>Element:</strong> {modalCharacter.element}</p>}
-      {modalCharacter.personality && <p><strong>Personality:</strong> {modalCharacter.personality}</p>}
-      {modalCharacter.likes && <p>♡: {modalCharacter.likes.join(", ")}</p>}
-      {modalCharacter.dislikes && <p>⚔: {modalCharacter.dislikes.join(", ")}</p>}
-      <img className="modal-image" src={modalCharacter.image} alt={modalCharacter.name} />
-    </div>
-  </div>
-)}
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={handleCloseModal}>×</button>
+            <h2 className="modal-name">{modalCharacter.name}</h2>
+            {modalCharacter.quote && <p className="modal-quote">“{modalCharacter.quote}”</p>}
+            {modalCharacter.element && <p><strong>Element:</strong> {modalCharacter.element}</p>}
+            {modalCharacter.personality && <p><strong>Personality:</strong> {modalCharacter.personality}</p>}
+            {modalCharacter.likes && <p>♡: {modalCharacter.likes.join(", ")}</p>}
+            {modalCharacter.dislikes && <p>⚔: {modalCharacter.dislikes.join(", ")}</p>}
+            <img className="modal-image" src={modalCharacter.image} alt={modalCharacter.name} />
 
+            {/* Select/Deselect Button */}
+            <button
+              className="modal-select-btn"
+              onClick={() => {
+                handleToggleSelection(modalCharacter);
+                handleCloseModal();
+              }}
+            >
+              {selected.find((c) => c.name === modalCharacter.name) ? "Deselect" : "Select"}
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="continue">
         Duo selected? Hit <span onClick={handleContinue}>continue</span> and let the adventure begin!
