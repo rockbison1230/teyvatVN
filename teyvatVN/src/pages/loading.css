@@ -1,31 +1,62 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: 'Quattrocento-Bold', serif;
+  font-family: "Quattrocento", serif;
 }
 
 .loading-container {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to bottom, #1A1D3B, #424A91);
+  background: linear-gradient(to bottom, #1a1d3b, #424a91);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.8s ease-out; /* Smooth transition for fade-out */
+  opacity: 1;
+}
+
+/* NEW: This class will be added to trigger the fade */
+.loading-container.fading-out {
+  opacity: 0;
 }
 
 .quill-image {
-  width: 6.5rem; 
+  width: 6.5rem;
   height: 10rem;
-  margin-bottom: .2rem;
+  margin-bottom: 0.2rem;
+  /* NEW: Applying the writing animation */
+  animation: writing 1.6s ease-in-out infinite;
+  transform-origin: bottom center; /* Make it pivot from the bottom */
+}
+@keyframes writing {
+  0% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
 }
 
 .loading-text {
   color: white;
-  font-size: 3.2rem; 
+  font-size: 3.2rem;
   margin-top: 1rem;
   text-align: center;
+}
 
+.quill-image,
+.loading-text {
+  transition: opacity 0.8s ease-out;
+}
+
+.fading-out .quill-image,
+.fading-out .loading-text {
+  opacity: 0;
 }

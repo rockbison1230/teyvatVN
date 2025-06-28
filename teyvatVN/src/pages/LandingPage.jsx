@@ -40,7 +40,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="page-container">
+    <div className="page-container fade-in">
       {/* Header */}
       <header className="header">
         <div className="logo">teyvat.vn</div>

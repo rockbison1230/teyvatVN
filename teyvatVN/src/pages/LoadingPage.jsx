@@ -1,21 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./loading.css";
-import quillImage from "../assets/images/quill.png"; // adjust path if needed
+import quillImage from "../assets/images/quill.png";
 
 export default function LoadingPage() {
   const navigate = useNavigate();
+  // State to control the fade-out animation
+  const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/landing");
-    }, 2000);
+    // Timer to start the fade-out after 1 second
+    const fadeTimer = setTimeout(() => {
+      setIsFadingOut(true);
+    }, 1000); // 1 second delay
 
-    return () => clearTimeout(timer);
+    // Timer to navigate to the landing page AFTER the fade animation completes
+    const navigateTimer = setTimeout(() => {
+      navigate("/landing");
+    }, 2200);
+
+    // Cleanup function to clear timers if the component unmounts
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(navigateTimer);
+    };
   }, [navigate]);
 
   return (
-    <div className="loading-container">
+    // Conditionally apply the 'fading-out' class to trigger the animation
+    <div className={`loading-container ${isFadingOut ? "fading-out" : ""}`}>
       <img src={quillImage} alt="Quill" className="quill-image" />
       <h1 className="loading-text">Rewrite the lore, your way!</h1>
     </div>
