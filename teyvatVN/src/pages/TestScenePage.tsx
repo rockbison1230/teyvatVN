@@ -3,6 +3,9 @@ import SegmentNavigator from "../components/SegmentNavigator";
 import scene from "../data/sample_scene.json";
 import fallbackScene from "../data/sample_scene.json";
 
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // Define the type structure (same as in SegmentNavigator)
 type Segment = {
@@ -17,6 +20,15 @@ export default function TestScenePage() {
   const saved = localStorage.getItem("latestResult");
   const scene = saved ? JSON.parse(saved) : fallbackScene;
   const segments = scene.segments as Segment[]; // 👈 cast to expected type
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (!user) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <div className="bg-black min-h-screen text-white p-6">
