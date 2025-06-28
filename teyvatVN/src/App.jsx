@@ -1,34 +1,24 @@
-// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import your actual page components
-//import LoadingPage from "./pages/LoadingPage.jsx";
-import LandingPage from "./pages/LandingPage.jsx"; // Make sure to use LandingPage
-//import StoryPage from "./pages/StoryPage.jsx"; // Import the StoryPage
-import TestScenePage from "./pages/TestScenePage.js";
+import LoadingPage from "./pages/LoadingPage.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import TestScenePage from "./pages/TestScenePage"; // Make sure this file exists
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/*
-          The root path '/' initially shows the LoadingPage.
-          LoadingPage will then redirect to /landing after a delay.
+        {/* Root: loading screen */}
+        <Route path="/" element={<LoadingPage />} />
 
-                 <Route path="/" element={<LoadingPage />} /> add this once loading page finish, and change landing path
-                 to /landing
+        {/* Main landing */}
+        <Route path="/landing" element={<LandingPage />} />
 
-        */}
+        {/* Test route */}
+        <Route path="/test_scene" element={<TestScenePage />} />
 
-        {/* The explicit path for your main landing content */}
-        <Route path="/" element={<LandingPage />} />
-
-        {/* The path for your story content 
-        
-         <Route path="/story" element={<StoryPage />} />*/}
-
-        {/* Catch-all for any unknown paths */}
+        {/* 404 fallback */}
         <Route
           path="*"
           element={
@@ -39,11 +29,8 @@ function App() {
               </p>
             </div>
           }
-          
         />
-        <Route path="/test_scene" element={<TestScenePage />} />
       </Routes>
-      
     </Router>
   );
 }
