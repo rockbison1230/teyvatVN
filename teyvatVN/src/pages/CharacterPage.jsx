@@ -77,8 +77,8 @@ function CharacterPage() {
       // console.log(selected[1])
       // temp for Dawn to hold the current characters in character1 and character2
       // 🔐 Save prompt and result to localStorage
-      localStorage.setItem("character1", selected[0]);
-      localStorage.setItem("character2", selected[1]);
+      localStorage.setItem("character1", JSON.stringify(selected[0]));
+      localStorage.setItem("character2", JSON.stringify(selected[1]));
       
       
       navigate("/story"); // Navigate to the story page
