@@ -1,0 +1,166 @@
+.character-page-container {
+  font-family: "Quattrocento", sans-serif;
+  padding: 2rem;
+  color: #111;
+  background: white;
+}
+
+.page-title {
+  font-family: "Quattrocento", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+  color: black;
+}
+
+.page-description {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: black;
+  max-width: 100%;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.search-container {
+  position: relative;
+  width: 260px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  border: 1px solid #c7c3c3;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.clear-search {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+  font-weight: bold;
+}
+
+.selected-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.selected-avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.selected-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #c7c3c3;
+  object-fit: cover;
+}
+
+.deselect-x {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #fff;
+  border: 1px solid #c7c3c3;
+  border-radius: 50%;
+  font-size: 12px;
+  line-height: 1;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selected-count {
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.start-over {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 0.25rem;
+  color: #c7c3c3;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  row-gap: 2rem;
+  column-gap: 15rem;
+  justify-content: center;
+  margin-left: -10rem;
+}
+
+.character-card {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #c7c3c3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.character-card.selected {
+  box-shadow: 0 0 0 3px #74A6ED;
+}
+
+.character-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-grow: 1;
+  background: white;
+}
+
+.character-name {
+  background-color: #a7b7e4;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 2px 4px;
+  text-align: center;
+  height: 24px;
+  line-height: 20px;
+}
+
+.continue {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.continue span {
+  text-decoration: underline;
+  color: #1c1b3a;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.continue span:hover {
+  color: #74A6ED;
+}

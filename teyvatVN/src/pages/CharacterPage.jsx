@@ -1,11 +1,8 @@
-// src/pages/CharacterPage.jsx
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCharacters } from "../context/CharacterContext";
-import "./character-page.css";
+import "./CharacterPage.css";
 
-// --- FIXED: Paths now point to the renamed 'character-sprites' folder ---
 import albedoImg from "../assets/character-sprites/albedo.webp";
 import amberImg from "../assets/character-sprites/amber.webp";
 import barbaraImg from "../assets/character-sprites/barbara.webp";
@@ -23,9 +20,6 @@ import rosariaImg from "../assets/character-sprites/rosaria.webp";
 import sucroseImg from "../assets/character-sprites/sucrose.png";
 import ventiImg from "../assets/character-sprites/venti.webp";
 
-// The rest of your component code...
-
-// Create a data structure with all character info
 const allCharacters = [
   { name: "Albedo", image: albedoImg },
   { name: "Amber", image: amberImg },
@@ -46,101 +40,91 @@ const allCharacters = [
 ];
 
 function CharacterPage() {
-  // --- In React, we use "state" to manage data ---
   const [selected, setSelected] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-  // --- Hooks for navigation and global state ---
   const navigate = useNavigate();
-  const { setSelectedCharacters } = useCharacters(); // From CharacterContext
+  const { setSelectedCharacters } = useCharacters();
 
   const handleToggleSelection = (character) => {
     if (selected.find((c) => c.name === character.name)) {
-      // Deselect character
       setSelected((prev) => prev.filter((c) => c.name !== character.name));
     } else if (selected.length < 2) {
-      // Select character
       setSelected((prev) => [...prev, character]);
     } else {
       alert("You can only select up to 2 characters.");
     }
   };
 
+  const handleClearSearch = () => setSearchTerm("");
+  const handleDeselect = (name) =>
+    setSelected((prev) => prev.filter((c) => c.name !== name));
+  const handleStartOver = () => setSelected([]);
+
   const handleContinue = () => {
     if (selected.length === 2) {
-      setSelectedCharacters(selected); // Save the choice to the global context
-
-      // used for finding the current characters selected so that I can use them in the scene selection
-      // console.log("the selected characters are: 0 ")
-      // console.log(selected[0])
-      // console.log("the selected characters are: 1 ")
-      // console.log(selected[1])
-      // temp for Dawn to hold the current characters in character1 and character2
-      // 🔐 Save prompt and result to localStorage
+      setSelectedCharacters(selected);
       localStorage.setItem("character1", JSON.stringify(selected[0]));
       localStorage.setItem("character2", JSON.stringify(selected[1]));
-      
-      
-      navigate("/story"); // Navigate to the story page
+      navigate("/story");
     } else {
       alert("Please select exactly 2 characters to continue.");
     }
   };
 
-  // Filter characters based on the search term
   const filteredCharacters = allCharacters.filter((char) =>
     char.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // --- This is the JSX that React renders to the screen ---
   return (
     <div className="character-page-container">
-      <div className="selection-header">
-        <h1>Select Your Duo</h1>
-        <p>Choose two characters to star in your AI-generated story.</p>
-        <div className="search-bar">
+      <h1 className="page-title">Characters</h1>
+      <p className="page-description">
+        Pick two characters to star in your story. Click a card to view their profile — then select your favorites to begin the journey.
+      </p>
+
+      <div className="topbar">
+        <div className="search-container">
           <input
             type="text"
+            className="search-input"
             placeholder="Search for a character..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          {searchTerm && (
+            <span className="clear-search" onClick={handleClearSearch}>
+              ×
+            </span>
+          )}
         </div>
-        <div className="selection-tray">
-          <div id="selectedIcons" className="selected-icons">
-            {selected.map((char) => (
-              <img
-                key={char.name}
-                src={char.image}
-                alt={char.name}
-                className="selected-icon-img"
-              />
-            ))}
-          </div>
-          <span id="selectedCount">{selected.length}/2 Selected</span>
-          <button
-            id="continueBtn"
-            onClick={handleContinue}
-            disabled={selected.length !== 2}
-          >
-            Continue
-          </button>
+
+        <div className="selected-bar">
+          {selected.map((char) => (
+            <div key={char.name} className="selected-avatar">
+              <img src={char.image} alt={char.name} />
+              <span onClick={() => handleDeselect(char.name)} className="deselect-x">×</span>
+            </div>
+          ))}
+          <span className="selected-count">{selected.length}/2</span>
+          <button className="start-over" onClick={handleStartOver}>⟳</button>
         </div>
       </div>
 
-      <div id="characterGrid" className="character-grid">
-        {filteredCharacters.map((character) => (
+      <div className="character-grid">
+        {filteredCharacters.map((char) => (
           <div
-            key={character.name}
-            className={`character-card ${
-              selected.find((c) => c.name === character.name) ? "selected" : ""
-            }`}
-            onClick={() => handleToggleSelection(character)}
+            key={char.name}
+            className={`character-card ${selected.find((c) => c.name === char.name) ? "selected" : ""}`}
+            onClick={() => handleToggleSelection(char)}
           >
-            <img src={character.image} alt={character.name} />
-            <div className="character-name">{character.name}</div>
+            <img src={char.image} alt={char.name} />
+            <div className="character-name">{char.name}</div>
           </div>
         ))}
+      </div>
+
+      <div className="continue">
+        Duo selected? Hit <span onClick={handleContinue}>continue</span> and let the adventure begin!
       </div>
     </div>
   );

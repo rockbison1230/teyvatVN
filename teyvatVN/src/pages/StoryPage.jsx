@@ -1,33 +1,28 @@
 import { useState } from "react";
-import { useCharacters } from "../context/CharacterContext"; 
+import { useCharacters } from "../context/CharacterContext";
 import { generateStory } from "../api/generateStory";
-
+import { useNavigate } from "react-router-dom";
+import { FiArrowRight, FiRefreshCcw } from "react-icons/fi";
+import "./StoryPage.css";
+import bg1 from "../assets/background/favonius-cathedral.jpg";
+import bg2 from "../assets/background/mondstadt-night.jpg";
+import bg3 from "../assets/background/statue-of-seven-day.png";
 
 function StoryPage() {
   const [prompt, setPrompt] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(null);
+  const [generatedStory, setGeneratedStory] = useState("");
 
-  const { selectedCharacters } = useCharacters(); // 
-
-  console.log(selectedCharacters)
+  const navigate = useNavigate();
+  const { selectedCharacters } = useCharacters();
+  const character1 = localStorage.getItem("character1");
+  const character2 = localStorage.getItem("character2");
 
   const backgrounds = [
-    {
-      name: "Favonius Cathedral",
-      src: "/favonius-cathedral.jpg",
-    },
-    {
-      name: "Mondstadt Night",
-      src: "/mondstadt-night.jpg",
-    },
-    {
-      name: "Statue of the Seven",
-      src: "/statue-of-seven-day.png",
-    },
+    { name: "Favonius Cathedral", src: bg1 },
+    { name: "Statue of Seven", src: bg3 },
+    { name: "Mondstadt Fountain", src: bg2 }, 
   ];
-
-
-const [generatedStory, setGeneratedStory] = useState("");
 
 const handleGenerateStory = async () => {
   try {
@@ -43,95 +38,101 @@ const handleGenerateStory = async () => {
     setGeneratedStory("An error occurred while generating the story.");
   }
 };
+const generateStoyApiCall = async () => {
+    //setPrompt("");
+    console.log("Story logging information so that it can do the api calls in the backend")
+    console.log("prompt is ", prompt)
+    console.log("char1 is ", character1)
+    console.log("char2 is ", character2)
+    console.log("background is ", selectedBackground)
+    
+
+    //send api call with these data as it is. todo later
+    await fetch("https://script-deferred-sg-anthony.trycloudflare.com/api/dawn/chapter3", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: prompt,
+        char1: character1,
+        char2: character2,
+        background: selectedBackground,
+      }),
+    });
+  };
 
   const handleSave = () => {
     console.log("Story saved!");
-    // Implement save logic here
   };
 
   const handleClear = () => {
     setPrompt("");
-    console.log("Story cleared!");
+    console.log("Prompt cleared!");
   };
 
   const handleReset = () => {
-    setPrompt("");
-    setSelectedBackground(null);
-    setCharacters(dummySelectedCharacters);
-    console.log("Page reset!");
+    navigate("/characters"); // sends user back to character selection
   };
 
   return (
-    <div className="bg-gray-100 text-black min-h-screen px-6 pb-12">
-      {/* Title */}
+    <div className="bg-gray-100 text-black min-h-screen px-8 pb-12">
+      {/* Header */}
       <header className="pt-6">
-        <h1 className="text-3xl font-semibold text-center">Story</h1>
+        <h1 className="text-4xl font-bold mb-2 text-left">Story</h1>
+        <p className="text-md text-left text-gray-700 max-w-2xl">
+          Here’s where the magic happens. Drop your duo anywhere you want.
+          Mondstadt? College? Outer space? It’s your story — you decide!
+        </p>
       </header>
 
-      {/* Prompt Input */}
-      <section className="mt-6 text-center">
-        <input
-          type="text"
-          placeholder="Enter your story prompt..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          className="w-full max-w-xl px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-        {selectedBackground && (
-          <button
-            onClick={handleGenerateStory}
-            className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-          >
-            Go!
-          </button>
-        )}
-      </section>
-
-      {/* Background Selection */}
-      <section className="mt-10">
-        <h2 className="text-xl font-bold text-center mb-4">
-          Choose Your Background
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {backgrounds.map((bg, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedBackground(bg.src)}
-              className={`cursor-pointer rounded overflow-hidden border-4 ${
-                selectedBackground === bg.src
-                  ? "border-indigo-500"
-                  : "border-transparent"
-              }`}
-            >
-              <img
-                src={bg.src}
-                alt={bg.name}
-                className="w-full h-48 object-cover hover:opacity-80 transition"
-              />
-              <div className="text-center py-2 text-sm">{bg.name}</div>
-            </div>
-          ))}
+      {/* Prompt */}
+      <section className="mt-8 flex justify-center">
+        <div className="relative w-full max-w-xl">
+          <input
+            type="text"
+            placeholder="What kind of story do you want to tell?"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            className="w-full px-4 py-3 pr-12 rounded border border-gray-300 bg-white text-black placeholder-gray-500 focus:outline-none"
+          />
+          <FiArrowRight className="absolute top-3.5 right-4 text-xl text-gray-600" />
         </div>
       </section>
 
-      {/* Preview Section */}
+      {/* Background Toggles */}
+      <section className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {backgrounds.map((bg, idx) => (
+          <button
+            key={idx}
+            onClick={() => setSelectedBackground(bg.src)}
+            className={`px-4 py-2 rounded border transition ${
+              selectedBackground === bg.src
+                ? "bg-indigo-500 text-white border-indigo-500"
+                : "bg-white text-gray-800 border-gray-300"
+            }`}
+          >
+            {bg.name}
+          </button>
+        ))}
+      </section>
+
+      {/* Background Preview + Sprites */}
       {selectedBackground && (
         <section className="mt-10 text-center">
           <h3 className="text-lg font-semibold mb-4">Background Preview</h3>
-          <div className="relative inline-block max-w-full rounded overflow-hidden shadow-lg">
+          <div className="relative inline-block w-full max-w-4xl rounded overflow-hidden shadow-lg">
             <img
               src={selectedBackground}
-              alt="Selected background"
+              alt="Selected Background"
               className="w-full h-auto"
             />
-            {/* Characters overlay */}
+            {/* Character overlays */}
             {selectedCharacters.map((char, index) => (
               <img
                 key={index}
                 src={`/${char.sprite_name}.png`}
                 alt={char.name}
                 className={`absolute bottom-4 ${
-                  index === 0 ? "left-10" : "right-10"
+                  index === 0 ? "left-6" : "right-6"
                 } w-32 h-auto`}
               />
             ))}
@@ -139,14 +140,15 @@ const handleGenerateStory = async () => {
         </section>
       )}
 
+      {/* Generated Story */}
       {generatedStory && (
-  <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
-    <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
-    <p className="whitespace-pre-wrap">{generatedStory}</p>
-  </section>
-)}
+        <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
+          <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
+          <p className="whitespace-pre-wrap">{generatedStory}</p>
+        </section>
+      )}
 
-      {/* Bottom Buttons */}
+      {/* Action Buttons */}
       <section className="mt-12 text-center space-x-4">
         <button
           onClick={handleSave}
@@ -161,12 +163,23 @@ const handleGenerateStory = async () => {
           Clear Prompt
         </button>
         <button
-          onClick={handleReset}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={generateStoryApiCall}
+          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
         >
-          Reset Page
+          Generate Story!
         </button>
       </section>
+
+      {/* Bottom Reset */}
+      <footer className="mt-16 text-center text-gray-700">
+        <span>Want a fresh start? </span>
+        <button
+          onClick={handleReset}
+          className="inline-flex items-center text-indigo-600 underline font-medium hover:text-indigo-800"
+        >
+          Reset <FiRefreshCcw className="ml-2" />
+        </button>
+      </footer>
     </div>
   );
 }
