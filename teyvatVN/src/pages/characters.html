@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Character Selection</title>
+  <link rel="stylesheet" href="characters.css" />
+</head>
+<body>
+  <header>
+    <span class="logo">teyvat.vn</span>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Characters</a>
+      <a href="#">Story</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Characters</h1>
+    <p class="subtitle">
+      Pick two characters to star in your story. Click a card to view their profile — then select your favorites to begin the journey.
+    </p>
+
+    <div class="topbar">
+      <input type="text" placeholder="Search" id="searchInput" class="search-input" />
+      <div class="selected-bar">
+        <div id="selectedIcons"></div>
+        <span id="selectedCount">0/2</span>
+      </div>
+    </div>
+
+    <div id="characterGrid"></div>
+
+    <p class="continue">
+      Duo selected? Hit <span id="continueBtn">continue</span> and let the adventure begin!
+    </p>
+  </main>
+
+  <footer>
+    Built for <strong>GemiKnights</strong> 2025. Powered by Google Gemini.<br />
+    Quill pen SVG by
+    <a href="https://thenounproject.com/icon/quill-pen-3147689/" target="_blank">Noun Project</a> (CC BY 3.0).
+  </footer>
+
+  <script src="characters.js"></script>
+</body>
+</html>
