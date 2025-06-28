@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SegmentNavigator from "../components/SegmentNavigator";
-import scene from "../data/sample_scene.json";
 import fallbackScene from "../data/sample_scene.json";
 
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+const url = "https://script-deferred-sg-anthony.trycloudflare.com/data/dawn/chapter1/output.json";
 
-
-// Define the type structure (same as in SegmentNavigator)
+// Define the type structure
 type Segment = {
   type: "dialogue" | "narration";
   speaker?: string;
@@ -16,19 +13,48 @@ type Segment = {
   text?: string;
 };
 
-export default function TestScenePage() {
-  const saved = localStorage.getItem("latestResult");
-  const scene = saved ? JSON.parse(saved) : fallbackScene;
-  const segments = scene.segments as Segment[]; // 👈 cast to expected type
+type Scene = {
+  title: string;
+  characters: string[];
+  backgrounds: string[];
+  setting_narration: string;
+  segments: Segment[];
+};
 
-  const navigate = useNavigate();
+export default function TestScenePage() {
+  const [scene, setScene] = useState<Scene>(fallbackScene as Scene);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (!user) {
-      navigate("/login");
+    const local = localStorage.getItem("latestResult");
+
+    if (local) {
+      try {
+        setScene(JSON.parse(local));
+        setIsLoaded(true);
+        return;
+      } catch (e) {
+        console.warn("LocalStorage data invalid, falling back to server fetch.");
+      }
     }
-  }, [navigate]);
+
+    fetch(url)
+      
+      .then((res) => {
+        if (!res.ok) throw new Error("Fetch failed");
+        return res.json();
+      })
+      .then((data) => {
+        setScene(data);
+        setIsLoaded(true);
+      })
+      .catch((err) => {
+        console.warn("Failed to fetch from backend server, using fallbackScene.json", err);
+        setIsLoaded(true);
+      });
+  }, []);
+
+  if (!isLoaded) return <div className="text-white p-6">Loading scene...</div>;
 
   return (
     <div className="bg-black min-h-screen text-white p-6">
@@ -36,7 +62,7 @@ export default function TestScenePage() {
       <p className="text-center italic text-gray-400 mb-6">
         {scene.setting_narration}
       </p>
-      <SegmentNavigator segments={segments} />
+      <SegmentNavigator segments={scene.segments as Segment[]} />
     </div>
   );
 }

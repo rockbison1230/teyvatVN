@@ -1,0 +1,19 @@
+{
+    
+    "title": "the  Encounter from the server",
+    "characters": ["Luna", "Elias"],
+    "backgrounds": ["forest", "campfire"],
+    "setting_narration": "The fire crackles gently as shadows dance across the clearing.",
+    "segments": [
+        {
+        "type": "dialogue",
+        "speaker": "CharacterName",
+        "expression_action": "a brief action or expression in parentheses, e.g., '(sighs softly)', '(coldly)', '(turns away)'",
+        "line": "The actual dialogue line spoken by the character. This should be concise and impactful."
+        },
+        {
+        "type": "narration",
+        "text": "A brief stage direction or descriptive narration about character actions, expressions, or shifts in the environment or mood. Do NOT include character names unless describing their actions. (e.g., 'A tense silence stretches between them.', 'The glass clinks softly as he sets it down.')"
+        }
+    ]
+}
