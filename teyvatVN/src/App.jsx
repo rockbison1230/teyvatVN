@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LoadingPage from "./pages/LoadingPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
+import CharacterPage from "./pages/CharacterPage.jsx";
+
 import TestScenePage from "./pages/TestScenePage"; // Make sure this file exists
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
 
         {/* Test route */}
         <Route path="/test_scene" element={<TestScenePage />} />
+        <Route path="/characters" element={<CharacterPage />} />
 
         {/* 404 fallback */}
         <Route
