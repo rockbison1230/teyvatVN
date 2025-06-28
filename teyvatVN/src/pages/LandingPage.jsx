@@ -1,74 +1,127 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import bgImage from "../assets/background/landing-page-lcp.jpg";
 
-function LandingPage() {
+export default function LandingPage() {
   return (
-    <div className="bg-gray-100 text-black min-h-screen px-6 pb-12 font-sans">
-      {/* Nav */}
-      <nav className="flex justify-end space-x-4 text-sm pt-4">
-        <Link to="/" className="hover:underline">
-          Home
-        </Link>
-        <a href="#about" className="hover:underline">
-          About
-        </a>
-      </nav>
+    <div className="bg-white text-gray-900 font-solway">
+      {/* HEADER */}
+      <header className="absolute top-0 left-0 w-full z-10 flex justify-between items-center px-6 py-4 text-white font-quattro">
+        <div className="text-lg font-bold tracking-wide">teyvat.vn</div>
+        <nav className="space-x-6 text-sm">
+          <a href="#how-to" className="hover:underline">
+            How To Play
+          </a>
+          <a href="#about" className="hover:underline">
+            About
+          </a>
+        </nav>
+      </header>
 
-      {/* Hero */}
-      <section className="text-center mt-12">
-        <h1 className="text-4xl font-bold mb-3">
-          Your story. Their world. Any universe.
-        </h1>
-        <p className="text-lg text-gray-700 max-w-xl mx-auto mb-6">
-          Create custom Genshin Impact visual novel fanfics with endless
-          possibilities — powered by Google Gemini ✦
-        </p>
-        <Link
-          to="/characters"
-          className="inline-block mt-2 px-6 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 transition"
-        >
-          ➤ Choose Your Duo to Begin
-        </Link>
+      {/* HERO */}
+      <section
+        className="h-screen w-full bg-cover bg-center flex items-center justify-center text-white text-center px-4"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
+        <div className="max-w-2xl">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3 font-quattro">
+            Your story. Their world. Any universe.
+          </h1>
+          <p className="mb-4 font-solway">
+            Create custom Genshin Impact visual novel fanfics with endless
+            possibilities — powered by Google Gemini ✦
+          </p>
+          <Link
+            to="/characters"
+            className="text-white font-semibold hover:underline"
+          >
+            → Choose Your Duo to Begin
+          </Link>
+        </div>
       </section>
 
-      {/* How to Play */}
-      <section className="mt-20 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-3">How To Play</h2>
-        <ol className="list-decimal list-inside space-y-2 text-base text-gray-800">
-          <li>
-            <strong>Choose 2 Characters</strong> – Pick your Genshin duo to star
-            in the story.
-          </li>
-          <li>
-            <strong>Set the Scene</strong> – Type in any setting you can imagine
-            — no limits.
-          </li>
-          <li>
-            <strong>Generate & Play</strong> – Watch your AI-powered visual
-            novel unfold.
-          </li>
-          <li>
-            <strong>Branch the Story</strong> – Shape the plot or regenerate for
-            twists!
-          </li>
-        </ol>
+      {/* HOW TO PLAY */}
+      <section
+        id="how-to"
+        className="pt-32 px-6 pb-20 max-w-4xl mx-auto text-center"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 font-quattro">
+          How To Play
+        </h2>
+        <div className="text-left space-y-4 text-base">
+          <div>
+            <h3 className="font-semibold mb-1 font-quattro">
+              1. Choose 2 Characters
+            </h3>
+            <p className="font-solway">
+              Pick your Genshin duo to star in the story.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1 font-quattro">
+              2. Set the Scene
+            </h3>
+            <p className="font-solway">
+              Type in any setting you can imagine — no limits.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1 font-quattro">
+              3. Generate & Play
+            </h3>
+            <p className="font-solway">
+              Watch your AI-powered visual novel unfold with dynamic dialogue
+              and choices.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1 font-quattro">
+              4. Branch the Story
+            </h3>
+            <p className="font-solway">
+              Make decisions to shape the plot — or regenerate for a new twist!
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* About Us */}
-      <section id="about" className="mt-20 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-3">About Us</h2>
-        <p className="text-base text-gray-800">
+      {/* ABOUT */}
+      <section id="about" className="px-6 py-20 max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 font-quattro">
+          About Us
+        </h2>
+        <p className="text-base text-gray-700 mb-6 font-solway">
           We’re four UCF students who teamed up to build something fun (and a
-          little unhinged). Click our names to view our portfolios or GitHub
-          profiles — we’d love to connect!
+          little unhinged). This project is built with React, Tailwind, and
+          Gemini to explore AI storytelling in fandom.
         </p>
+        <p className="text-sm italic text-gray-500 font-solway">
+          <em>teyvat.vn</em> is a non-commercial fan project. All assets belong
+          to their original creators.
+        </p>
+
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-lg">
+          <div className="font-quattro text-gray-800">Amana</div>
+          <div className="font-solway text-gray-800">Dawn</div>
+          <div className="font-quattro text-gray-800">Lily</div>
+          <div className="font-solway text-gray-800">Cami</div>
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-20 text-xs text-center text-gray-600 border-t border-gray-200 pt-4">
-        Built for <strong>GemiKnights</strong> 2025. Powered by Google Gemini.
+      {/* FOOTER */}
+      <footer className="bg-gray-900 text-white text-sm py-4 text-center">
+        Built for <span className="font-semibold">GemiKnights</span> 2025.
+        Powered by Google Gemini. <br />
+        Quill pen SVG by Kangrif from{" "}
+        <a
+          className="underline"
+          href="https://thenounproject.com/"
+          target="_blank"
+        >
+          Noun Project
+        </a>{" "}
+        (CC BY 3.0).
       </footer>
     </div>
   );
 }
-
-export default LandingPage;

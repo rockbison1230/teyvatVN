@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import CharacterCard from "../components/CharacterCard.jsx";
 import { useCharacters } from "../context/CharacterContext";
 
-const { setSelectedCharacters } = useCharacters();
-
-
 // 🧠 Direct image imports (Vite will bundle them)
 
 import kaeyaPng from "../assets/character sprites/kaeya.png";
@@ -22,6 +19,8 @@ const characters = [
 ];
 
 export default function CharacterPage() {
+  const { setSelectedCharacters } = useCharacters();
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col justify-between">
       {/* Header */}
