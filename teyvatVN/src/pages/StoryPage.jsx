@@ -24,22 +24,31 @@ function StoryPage() {
     { name: "Mondstadt Fountain", src: bg2 }, 
   ];
 
-  const handleGenerateStory = async () => {
-    try {
-      const story = await generateStory({
-        prompt,
-        characters: selectedCharacters,
-        background: selectedBackground,
-      });
-      setGeneratedStory(story);
-    } catch (err) {
-      console.error("Error generating story:", err);
-      setGeneratedStory("An error occurred while generating the story.");
-    }
-  };
+const handleGenerateStory = async () => {
+  try {
+    const story = await generateStory({
+      prompt,
+      characters: selectedCharacters,
+      background: selectedBackground,
+    });
 
-  const generateStoryApiCall = async () => {
-    await fetch("http://localhost:4000/api/dawn/chapter3", {
+    setGeneratedStory(story);
+  } catch (err) {
+    console.error("Error generating story:", err);
+    setGeneratedStory("An error occurred while generating the story.");
+  }
+};
+const generateStoyApiCall = async () => {
+    //setPrompt("");
+    console.log("Story logging information so that it can do the api calls in the backend")
+    console.log("prompt is ", prompt)
+    console.log("char1 is ", character1)
+    console.log("char2 is ", character2)
+    console.log("background is ", selectedBackground)
+    
+
+    //send api call with these data as it is. todo later
+    await fetch("https://script-deferred-sg-anthony.trycloudflare.com/api/dawn/chapter3", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
