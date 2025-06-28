@@ -9,8 +9,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Root: loading screen */}
-        <Route path="/" element={<LoadingPage />} />
+        {/*
+          The root path '/' initially shows the LoadingPage.
+          LoadingPage will then redirect to /landing after a delay.
+
+                 <Route path="/" element={<LoadingPage />} /> add this once loading page finish, and change landing path
+                 to /landing
+
+        */}
 
         {/* Main landing */}
         <Route path="/landing" element={<LandingPage />} />
