@@ -9,7 +9,14 @@ function StoryPage() {
 
   const { selectedCharacters } = useCharacters(); // 
 
-  console.log(selectedCharacters)
+  const character1 = localStorage.getItem("character1");
+  const character2 = localStorage.getItem("character2");
+  // // used for finding the current characters selected so that I can use them in the scene selection
+  // console.log("in storypage")
+  // console.log("the selected characters are: 0 ")
+  // console.log(character1)
+  // console.log("the selected characters are: 1 ")
+  // console.log(character2)
 
   const backgrounds = [
     {
@@ -43,6 +50,17 @@ const handleGenerateStory = async () => {
     setGeneratedStory("An error occurred while generating the story.");
   }
 };
+const generateStoyApiCall = () => {
+    //setPrompt("");
+    console.log("Story logging information so that it can do the api calls in the backend")
+    console.log("prompt is ", prompt)
+    console.log("char1 is ", character1)
+    console.log("char2 is ", character2)
+    console.log("background is ", selectedBackground)
+
+    //send api call with these data as it is. todo later
+
+  };
 
   const handleSave = () => {
     console.log("Story saved!");
@@ -82,7 +100,7 @@ const handleGenerateStory = async () => {
             onClick={handleGenerateStory}
             className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
           >
-            Go!
+            Go! DO NOT PRESS ME JUST YET THIS BREAKS IT 
           </button>
         )}
       </section>
@@ -121,7 +139,7 @@ const handleGenerateStory = async () => {
           <div className="relative inline-block max-w-full rounded overflow-hidden shadow-lg">
             <img
               src={selectedBackground}
-              alt="Selected background"
+              alt={selectedBackground}
               className="w-full h-auto"
             />
             {/* Characters overlay */}
@@ -165,6 +183,13 @@ const handleGenerateStory = async () => {
           className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           Reset Page
+        </button>
+        <button
+          // this is so that it sends the api call to the backend to do the story generation
+          onClick={generateStoyApiCall}
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Generate Story!
         </button>
       </section>
     </div>
