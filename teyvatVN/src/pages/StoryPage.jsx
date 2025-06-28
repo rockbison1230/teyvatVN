@@ -50,15 +50,28 @@ const handleGenerateStory = async () => {
     setGeneratedStory("An error occurred while generating the story.");
   }
 };
-const generateStoyApiCall = () => {
+const generateStoyApiCall = async () => {
     //setPrompt("");
     console.log("Story logging information so that it can do the api calls in the backend")
     console.log("prompt is ", prompt)
     console.log("char1 is ", character1)
     console.log("char2 is ", character2)
     console.log("background is ", selectedBackground)
+    
 
     //send api call with these data as it is. todo later
+    await fetch("http://localhost:4000/api/dawn/chapter3", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        char1: character1,
+        char2: character2,
+        background: selectedBackground,
+      }),
+    });
 
   };
 

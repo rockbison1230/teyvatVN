@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -42,13 +42,55 @@ def get_chapter(username: str, chapter_id: str):
     with open(path, "r", encoding="utf-8") as f:
         return {"message": "Loaded", "data": json.load(f)}
 
-# API: Save chapter
-@app.post("/api/chapter/{username}/{chapter_id}")
-def save_chapter(username: str, chapter_id: str, chapter: ChapterData):
-    path = get_chapter_path(username, chapter_id)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(chapter.dict(), f, indent=2, ensure_ascii=False)
-    return {"message": f"Chapter saved to {username}/{chapter_id}/output.json"}
+# # API: Save chapter
+# @app.post("/api/chapter/{username}/{chapter_id}")
+# def save_chapter(username: str, chapter_id: str, chapter: ChapterData):
+#     path = get_chapter_path(username, chapter_id)
+#     with open(path, "w", encoding="utf-8") as f:
+#         json.dump(chapter.dict(), f, indent=2, ensure_ascii=False)
+#     return {"message": f"Chapter saved to {username}/{chapter_id}/output.json"}
+
+
+
+# Create a new chapter or overwrite it
+@app.post("/api/{username}/{chapter_id}")
+async def save_chapter(username: str, chapter_id: str, request: Request):
+    try:
+        body = await request.json()
+        prompt = body["prompt"]
+        char1 = body["char1"]
+        char2 = body["char2"]
+        background = body["background"]
+    except KeyError as e:
+        raise HTTPException(status_code=400, detail=f"Missing field: {e}")
+    except Exception:
+        print("there was a bad call ")
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+
+
+    print(f"Prompt is {prompt}")
+    print(f"Prompt is {char1}")
+    print(f"Prompt is {char2}")
+    print(f"Prompt is {background}")
+
+
+    # chapter_dir = os.path.join(DATA_DIR, username, chapter_id)
+    # os.makedirs(chapter_dir, exist_ok=True)
+
+    # file_path = os.path.join(chapter_dir, "output.json")
+    # with open(file_path, "w", encoding="utf-8") as f:
+    #     json.dump(data, f, indent=2)
+
+    return {"status": "success", "path": f"{username}/{chapter_id}/output.json"}
+
+
+
+
+
+
+
+
+
 
 # Mount the /data directory for direct file access
 app.mount("/data", StaticFiles(directory=DATA_DIR), name="data")
