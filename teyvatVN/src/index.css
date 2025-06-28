@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -19,7 +18,7 @@
 }
 
 h1 {
-  font-family: 'Quattrocento', serif;
+  font-family: "Quattrocento", serif;
   color: white;
 }
 
@@ -75,4 +74,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
