@@ -2,50 +2,31 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import your Landing page component
-import Landing from "./pages/LandingPage.jsx"; // Make sure the path is correct
-
-// --- Placeholder Components for other routes ---
-// (You or your teammate will replace these with actual components later)
-function Page1() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-500 text-white text-3xl">
-      <h1>This is Page 1! (Placeholder)</h1>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-green-500 text-white text-3xl">
-      <h1>Welcome to the Dashboard!</h1>
-    </div>
-  );
-}
-// --- End Placeholder Components ---
+// Import your actual page components
+//import LoadingPage from "./pages/LoadingPage.jsx";
+import LandingPage from "./pages/LandingPage.jsx"; // Make sure to use LandingPage
+import StoryPage from "./pages/StoryPage.jsx"; // Import the StoryPage
 
 function App() {
   return (
-    // BrowserRouter wraps your entire application to enable routing
     <Router>
-      {/*
-        Routes renders the first <Route> that matches the current URL.
-        Think of it like a switch statement for your routes.
-      */}
       <Routes>
-        {/* Route for your Landing page. */}
-        <Route path="/" element={<Landing />} />
-
-        {/* Example Route for Page 1 */}
-        <Route path="/page1" element={<Page1 />} />
-
-        {/* Example Route for a Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
         {/*
-          Optional: A catch-all route for 404 Not Found pages.
-          This should be the last route.
+          The root path '/' initially shows the LoadingPage.
+          LoadingPage will then redirect to /landing after a delay.
+
+                 <Route path="/" element={<LoadingPage />} /> add this once loading page finish, and change landing path
+                 to /landing
+
         */}
+
+        {/* The explicit path for your main landing content */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* The path for your story content */}
+        <Route path="/story" element={<StoryPage />} />
+
+        {/* Catch-all for any unknown paths */}
         <Route
           path="*"
           element={
