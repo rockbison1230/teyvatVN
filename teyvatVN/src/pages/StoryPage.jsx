@@ -78,13 +78,13 @@ const generateStoryApiCall = async () => {
   return (
     <div className="bg-gray-100 text-black min-h-screen px-8 pb-12">
       {/* Header */}
-      <header className="pt-6">
-        <h1 className="text-4xl font-bold mb-2 text-left">Story</h1>
-        <p className="text-md text-left text-gray-700 max-w-2xl">
-          Here’s where the magic happens. Drop your duo anywhere you want.
-          Mondstadt? College? Outer space? It’s your story — you decide!
-        </p>
-      </header>
+      <header className="story-header">
+  <h1>Story</h1>
+  <p>
+    Here’s where the magic happens. Drop your duo anywhere you want.
+    Mondstadt? College? Outer space? It’s your story — you decide!
+  </p>
+</header>
 
       {/* Prompt */}
       <section className="mt-8 flex justify-center">
@@ -153,19 +153,19 @@ const generateStoryApiCall = async () => {
       <section className="mt-12 text-center space-x-4">
         <button
           onClick={handleSave}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          className="save-button"
         >
           Save Story
         </button>
         <button
           onClick={handleClear}
-          className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+          className="clear-button"
         >
           Clear Prompt
         </button>
         <button
           onClick={generateStoryApiCall}
-          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+          className="generate-button"
         >
           Generate Story!
         </button>
@@ -176,7 +176,7 @@ const generateStoryApiCall = async () => {
         <span>Want a fresh start? </span>
         <button
           onClick={handleReset}
-          className="inline-flex items-center text-indigo-600 underline font-medium hover:text-indigo-800"
+          className="reset-button"
         >
           Reset <FiRefreshCcw className="ml-2" />
         </button>

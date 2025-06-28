@@ -18,7 +18,7 @@ body {
 }
 
 .story-header h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   margin: 0;
   color: black;
@@ -27,6 +27,7 @@ body {
 .story-header p {
   font-size: 0.95rem;
   margin-top: 0.5rem;
+  color: black;
 }
 
 .prompt-section {
@@ -120,4 +121,49 @@ body {
   display: inline;
   vertical-align: middle;
   margin-left: 4px;
+}
+
+.save-button {
+  background-color: #22c55e; /* green-500 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #16a34a; /* green-600 */
+}
+
+.clear-button {
+  background-color: #eab308; /* yellow-500 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+  background-color: #ca8a04; /* yellow-600 */
+}
+
+.generate-button {
+  background-color: #4f46e5; /* indigo-600 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #4338ca; /* indigo-700 */
 }
