@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useCharacters } from "../context/CharacterContext"; // adjust path if needed
+import { useCharacters } from "../context/CharacterContext"; 
+import { generateStory } from "../api/generateStory";
+
 
 function StoryPage() {
   const [prompt, setPrompt] = useState("");
@@ -29,10 +31,22 @@ function StoryPage() {
     setCharacters(dummySelectedCharacters);
   }, []);
 
-  const handleGenerateStory = () => {
-    console.log("Generating story with prompt:", prompt);
-    // Trigger story generation logic here
-  };
+const [generatedStory, setGeneratedStory] = useState("");
+
+const handleGenerateStory = async () => {
+  try {
+    const story = await generateStory({
+      prompt,
+      characters: selectedCharacters,
+      background: selectedBackground,
+    });
+
+    setGeneratedStory(story);
+  } catch (err) {
+    console.error("Error generating story:", err);
+    setGeneratedStory("An error occurred while generating the story.");
+  }
+};
 
   const handleSave = () => {
     console.log("Story saved!");
@@ -128,6 +142,14 @@ function StoryPage() {
           </div>
         </section>
       )}
+
+      {generatedStory && (
+  <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
+    <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
+    <p className="whitespace-pre-wrap">{generatedStory}</p>
+  </section>
+)}
+
 
       {/* Bottom Buttons */}
       <section className="mt-12 text-center space-x-4">
