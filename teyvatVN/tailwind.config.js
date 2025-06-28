@@ -4,10 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        quattrocento: ['"Quattrocento"', 'serif'],
+        quattrocento: ['"Quattrocento"', "serif"],
+      },
     },
   },
-},
-  plugins: [],
-}
-
+  plugins: [require("@tailwindcss/aspect-ratio")],
+};
