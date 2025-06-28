@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCharacters } from "../context/CharacterContext";
-import "./character-page.css";
+import "./CharacterPage.css";
 
 // --- FIXED: Paths now point to the renamed 'character-sprites' folder ---
 import albedoImg from "../assets/character-sprites/albedo.webp";
