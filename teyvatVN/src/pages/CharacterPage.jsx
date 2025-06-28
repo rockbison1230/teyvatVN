@@ -69,6 +69,18 @@ function CharacterPage() {
   const handleContinue = () => {
     if (selected.length === 2) {
       setSelectedCharacters(selected); // Save the choice to the global context
+
+      // used for finding the current characters selected so that I can use them in the scene selection
+      // console.log("the selected characters are: 0 ")
+      // console.log(selected[0])
+      // console.log("the selected characters are: 1 ")
+      // console.log(selected[1])
+      // temp for Dawn to hold the current characters in character1 and character2
+      // 🔐 Save prompt and result to localStorage
+      localStorage.setItem("character1", selected[0]);
+      localStorage.setItem("character2", selected[1]);
+      
+      
       navigate("/story"); // Navigate to the story page
     } else {
       alert("Please select exactly 2 characters to continue.");

@@ -9,6 +9,8 @@ function StoryPage() {
 
   const { selectedCharacters } = useCharacters(); // 
 
+  console.log(selectedCharacters)
+
   const backgrounds = [
     {
       name: "Favonius Cathedral",
