@@ -1,23 +1,25 @@
-/* LandingPage.css */
-/* Prevent horizontal scroll globally */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+/* Universal settings for better layout control */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: #f9f9fb;
-  font-family: "Solway", serif;
   margin: 0;
-  padding: 0;
-  color: #222;
+  font-family: "Solway", serif;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.page-container {
+  /* This ensures our fixed header has a reference */
+  position: relative;
 }
 
 /* Header */
 .header {
-  position: absolute;
+  position: absolute; /* Floats over the hero */
   top: 0;
   left: 0;
   width: 100%;
@@ -27,140 +29,179 @@ body {
   align-items: center;
   z-index: 10;
   color: white;
+}
+
+.header .logo {
   font-family: "Quattrocento", serif;
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .nav-links a {
   margin-left: 1.5rem;
   color: white;
   text-decoration: none;
+  font-weight: bold;
 }
-
 .nav-links a:hover {
   text-decoration: underline;
 }
 
+/* Hero Section */
 .hero {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 2rem;
-  background-color: #f9f9fb; /* fallback */
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-content {
-  background-image: url("../assets/background/landing-page-lcp.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  width: 100%;
-  max-width: 1100px;
-  height: 85vh;
-
-  border-radius: 2rem;
-  margin: 0 auto; /* centers it */
-  overflow: hidden; /* clip internal overflow */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  color: white;
-  text-align: center;
-  padding: 4rem 2rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  max-width: 800px;
+  padding: 2rem;
 }
 
 .hero h1 {
-  font-size: 3rem;
   font-family: "Quattrocento", serif;
-  margin-bottom: 1.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.hero a {
+.hero-button {
   background: #4f46e5;
-  padding: 0.75rem 2rem;
+  padding: 0.8rem 2.5rem;
   color: white;
   border-radius: 0.5rem;
   text-decoration: none;
   font-weight: bold;
+  transition: all 0.3s ease;
 }
-
-.hero a:hover {
+.hero-button:hover {
   background: #6366f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* How to Play */
-.how-to {
+/* --- Main Content Wrapper --- */
+/* THIS IS THE KEY TO THE WHITESPACE */
+.main-content {
+  padding: 100px 2rem; /* HELLA PADDING! */
+}
+
+/* How to Play Section */
+.how-to-section {
   max-width: 1200px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Center the section */
+  margin-bottom: 120px; /* Space before the next section */
 }
 
-.how-to h2 {
-  text-align: center;
-  font-family: "Quattrocento", serif;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-.steps {
+.how-to-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4rem;
+  align-items: center;
 }
 
-.step {
-  background: #f8f9ff;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  border-left: 4px solid #4f46e5;
+.how-to-text h2 {
+  font-family: "Quattrocento", serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-.step h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  color: #4f46e5;
+.how-to-text p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
 }
 
-/* About */
-.about {
-  background: #f0f4ff;
-  padding: 3rem 2rem;
+.steps-list {
+  list-style: none;
+  padding: 0;
+}
+
+.steps-list li {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.steps-list strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: #111;
+}
+
+.how-to-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background-color: #eef2ff;
+  border-radius: 20px;
+  color: #6b7280;
+}
+
+/* About Us Section */
+.about-section {
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.about h2 {
+.about-section h2 {
   font-family: "Quattrocento", serif;
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
 }
 
-.about p {
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  font-size: 1rem;
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
-.about .team {
-  display: flex;
-  justify-content: center;
+.disclaimer {
+  font-size: 0.9rem !important;
+  color: #777 !important;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
+  margin-top: 3rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 100%;
+  max-width: 150px; /* Control max size of images */
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.team-member span {
   font-weight: bold;
+  color: #4f46e5;
+  font-family: "Quattrocento", serif;
 }
 
 /* Footer */
-footer {
+.footer {
   background: #111827;
   color: white;
   text-align: center;

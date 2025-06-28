@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./LandingPage.css";
+import "./LandingPage.css"; // Using our stylesheet
+
+// --- Main Hero Background ---
 import bgImage from "../assets/background/landing-page-lcp.jpg";
+
+// --- Character Images for the "About Us" section ---
+// Make sure these paths are correct!
+import kaeyaImg from "../assets/character-sprites/kaeya.png";
+import jeanImg from "../assets/character-sprites/jean.png";
+import keqingImg from "../assets/character-sprites/keqing.png";
+import sucroseImg from "../assets/character-sprites/sucrose.png";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -9,7 +18,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div>
+    <div className="page-container">
       {/* Header */}
       <header className="header">
         <div className="logo">teyvat.vn</div>
@@ -19,7 +28,7 @@ export default function LandingPage() {
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="hero" style={{ backgroundImage: `url(${bgImage})` }}>
         <div className="hero-content">
           <h1>Your story. Their world. Any universe.</h1>
@@ -27,51 +36,89 @@ export default function LandingPage() {
             Create custom Genshin Impact visual novel fanfics with endless
             possibilities — powered by Google Gemini ✦
           </p>
-          <Link to="/characters">→ Choose Your Duo to Begin</Link>
+          <Link to="/characters" className="hero-button">
+            → Choose Your Duo to Begin
+          </Link>
         </div>
       </section>
 
-      {/* How To Play */}
-      <section id="how-to" className="how-to">
-        <h2>How To Play</h2>
-        <div className="steps">
-          <div className="step">
-            <h3>1. Choose 2 Characters</h3>
-            <p>Pick any Genshin duo to star in your story.</p>
-          </div>
-          <div className="step">
-            <h3>2. Set the Scene</h3>
-            <p>Describe any location or setup you can imagine.</p>
-          </div>
-          <div className="step">
-            <h3>3. Generate & Play</h3>
-            <p>Watch the AI create your story with dialogue and choices.</p>
-          </div>
-          <div className="step">
-            <h3>4. Branch the Story</h3>
-            <p>Make decisions to shape the plot or try new paths.</p>
-          </div>
-        </div>
-      </section>
+      {/* This main tag creates the white content area with lots of padding */}
+      <main className="main-content">
+        {/* How To Play Section - Now a 2-column grid */}
+        <section id="how-to" className="how-to-section">
+          <div className="how-to-grid">
+            {/* Left Column: Text */}
+            <div className="how-to-text">
+              <h2>How To Play</h2>
+              <p>
+                Dive into your own fan-made Genshin story in just a few steps:
+              </p>
+              <ol className="steps-list">
+                <li>
+                  <strong>Choose 2 Characters</strong> - Pick your Genshin duo
+                  to star in the story.
+                </li>
+                <li>
+                  <strong>Set the Scene</strong> - Type in any setting you can
+                  imagine – no limits.
+                </li>
+                <li>
+                  <strong>Generate & Play</strong> - Watch your AI-powered
+                  visual novel unfold with dynamic dialogue and choices.
+                </li>
+                <li>
+                  <strong>Branch the Story</strong> - Make decisions to shape
+                  the plot – or regenerate for a new twist!
+                </li>
+              </ol>
+            </div>
 
-      {/* About */}
-      <section id="about" className="about">
-        <h2>About Us</h2>
-        <p>
-          We’re four UCF students who teamed up to build something fun (and a
-          little unhinged). This project explores AI storytelling in fandom
-          through React, CSS, and Gemini.
-        </p>
-        <div className="team">
-          <span>Amana</span>
-          <span>Dawn</span>
-          <span>Lily</span>
-          <span>Cami</span>
-        </div>
-      </section>
+            {/* Right Column: Placeholder */}
+            <div className="how-to-placeholder">
+              <span>Screenshot of the story page in use</span>
+            </div>
+          </div>
+        </section>
+
+        {/* About Us Section - Now with character images */}
+        <section id="about" className="about-section">
+          <h2>About Us</h2>
+          <p>
+            Thanks for checking out our project! We're four UCF students from
+            Computer Science, Engineering, IT, and Digital Media who teamed up
+            to build something fun (and a little unhinged), just like us. Click
+            our names to view our portfolios or GitHub profiles — we’d love to
+            connect!
+          </p>
+          <p className="disclaimer">
+            <em>teyvat.vn</em> is a non-commercial fan project, unaffiliated
+            with Genshin Impact, HoYoverse, or miHoYo. All assets belong to
+            their respective owners.
+          </p>
+
+          <div className="team-grid">
+            <div className="team-member">
+              <img src={kaeyaImg} alt="Amana's character" />
+              <span>Amana</span>
+            </div>
+            <div className="team-member">
+              <img src={jeanImg} alt="Dawn's character" />
+              <span>Dawn</span>
+            </div>
+            <div className="team-member">
+              <img src={keqingImg} alt="Lily's character" />
+              <span>Lily</span>
+            </div>
+            <div className="team-member">
+              <img src={sucroseImg} alt="Cami's character" />
+              <span>Cami</span>
+            </div>
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer>
+      <footer className="footer">
         <p>
           Built for <strong>GemiKnights</strong> 2025. Powered by Google Gemini.
         </p>
