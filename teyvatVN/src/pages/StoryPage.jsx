@@ -25,12 +25,6 @@ function StoryPage() {
   ];
 
 
-  // Simulate loading characters from context/state
-  useEffect(() => {
-    // Replace this with real data loading logic
-    setCharacters(dummySelectedCharacters);
-  }, []);
-
 const [generatedStory, setGeneratedStory] = useState("");
 
 const handleGenerateStory = async () => {
