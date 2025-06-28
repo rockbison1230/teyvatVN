@@ -5,6 +5,9 @@ from pydantic import BaseModel
 import os
 import json
 
+# custom libs
+import generate_ai_calls
+
 app = FastAPI()
 
 # Allow frontend to access this backend
@@ -73,13 +76,20 @@ async def save_chapter(username: str, chapter_id: str, request: Request):
     print(f"Prompt is {char2}")
     print(f"Prompt is {background}")
 
+    # build input json for the actual story to be generated:
 
-    # chapter_dir = os.path.join(DATA_DIR, username, chapter_id)
-    # os.makedirs(chapter_dir, exist_ok=True)
+    #     Build scene object
+    chapter_input = {
+        "characters": [char1, char2],
+        "start_setting": [background],
+        "story_direction": prompt
+    }
+    beats = generate_ai_calls(chapter_input)
 
-    # file_path = os.path.join(chapter_dir, "output.json")
-    # with open(file_path, "w", encoding="utf-8") as f:
-    #     json.dump(data, f, indent=2)
+    print(beats)
+
+
+
 
     return {"status": "success", "path": f"{username}/{chapter_id}/output.json"}
 
