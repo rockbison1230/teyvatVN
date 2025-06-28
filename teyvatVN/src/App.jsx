@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Import your actual page components
 //import LoadingPage from "./pages/LoadingPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx"; // Make sure to use LandingPage
-import StoryPage from "./pages/StoryPage.jsx"; // Import the StoryPage
-import TestScenePage from './pages/TestScenePage';  // import testing pages
+//import StoryPage from "./pages/StoryPage.jsx"; // Import the StoryPage
 
 function App() {
   return (
@@ -24,8 +23,9 @@ function App() {
         {/* The explicit path for your main landing content */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* The path for your story content */}
-        <Route path="/story" element={<StoryPage />} />
+        {/* The path for your story content 
+        
+         <Route path="/story" element={<StoryPage />} />*/}
 
         {/* Catch-all for any unknown paths */}
         <Route
