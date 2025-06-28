@@ -17,7 +17,8 @@ function App() {
                  to /landing
 
         */}
-
+        {/* Initial loading page */}
+        <Route path="/" element={<LoadingPage />} />
         {/* Main landing */}
         <Route path="/landing" element={<LandingPage />} />
 
