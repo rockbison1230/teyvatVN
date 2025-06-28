@@ -16,9 +16,8 @@ function LandingPage() {
       {/* Hero */}
       <section className="text-center mt-4">
         <img
-          src="/your-hero-image.jpg"
-          alt="Hero"
-          className="w-full h-auto rounded-md"
+          className="text-center mt-4 bg-cover bg-center bg-no-repeat rounded-md px-6 py-16"
+  style={{ backgroundImage: 'url("..assets/background/landing-page-lcp.jpg")' }}
         />
         <h1 className="text-3xl mt-4 font-semibold">
           Your story. Their world. Any universe.
