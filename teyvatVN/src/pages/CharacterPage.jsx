@@ -20,6 +20,17 @@ import rosariaImg from "../assets/character-sprites/rosaria.webp";
 import sucroseImg from "../assets/character-sprites/sucrose.png";
 import ventiImg from "../assets/character-sprites/venti.webp";
 
+const [modalCharacter, setModalCharacter] = useState(null);
+
+const handleOpenModal = (character) => {
+  setModalCharacter(character);
+};
+
+const handleCloseModal = () => {
+  setModalCharacter(null);
+};
+
+
 const allCharacters = [
   { name: "Albedo", image: albedoImg },
   { name: "Amber", image: amberImg },
@@ -28,8 +39,18 @@ const allCharacters = [
   { name: "Diluc", image: dilucImg },
   { name: "Eula", image: eulaImg },
   { name: "Fischl", image: fischlImg },
-  { name: "Jean", image: jeanImg },
-  { name: "Kaeya", image: kaeyaImg },
+  { name: "Jean", 
+    image: jeanImg },
+  { 
+  name: "Kaeya",
+  image: kaeyaImg,
+  element: "Cryo",
+  personality: "Charming, Sly",
+  likes: ["Albedo", "Jean", "Eula"],
+  dislikes: ["Diluc"],
+  quote: "It’ll be more fun to go together."
+}
+,
   { name: "Keqing", image: keqingImg },
   { name: "Lisa", image: lisaImg },
   { name: "Mona", image: monaImg },
@@ -115,13 +136,30 @@ function CharacterPage() {
           <div
             key={char.name}
             className={`character-card ${selected.find((c) => c.name === char.name) ? "selected" : ""}`}
-            onClick={() => handleToggleSelection(char)}
+            onClick={() => handleOpenModal(char)}
+
           >
             <img src={char.image} alt={char.name} />
             <div className="character-name">{char.name}</div>
           </div>
         ))}
       </div>
+
+      {modalCharacter && (
+  <div className="modal-overlay" onClick={handleCloseModal}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <button className="modal-close" onClick={handleCloseModal}>×</button>
+      <h2 className="modal-name">{modalCharacter.name}</h2>
+      {modalCharacter.quote && <p className="modal-quote">“{modalCharacter.quote}”</p>}
+      {modalCharacter.element && <p><strong>Element:</strong> {modalCharacter.element}</p>}
+      {modalCharacter.personality && <p><strong>Personality:</strong> {modalCharacter.personality}</p>}
+      {modalCharacter.likes && <p>♡: {modalCharacter.likes.join(", ")}</p>}
+      {modalCharacter.dislikes && <p>⚔: {modalCharacter.dislikes.join(", ")}</p>}
+      <img className="modal-image" src={modalCharacter.image} alt={modalCharacter.name} />
+    </div>
+  </div>
+)}
+
 
       <div className="continue">
         Duo selected? Hit <span onClick={handleContinue}>continue</span> and let the adventure begin!
