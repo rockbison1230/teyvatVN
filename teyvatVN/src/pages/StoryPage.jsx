@@ -1,13 +1,26 @@
 import { useState } from "react";
-import { useCharacters } from "../context/CharacterContext"; 
+import { useCharacters } from "../context/CharacterContext";
 import { generateStory } from "../api/generateStory";
-
+import { useEffect } from "react";
 
 function StoryPage() {
+  const dummySelectedCharacters = [
+    {
+      name: "Kaeya",
+      image: "./assets/character sprites/kaeya.png",
+      bio: "Cool-headed Cavalry Captain.",
+    },
+    {
+      name: "Jean",
+      image: "./assets/character sprites/jean.png",
+      bio: "Acting Grand Master of the Knights of Favonius.",
+    },
+  ];
+
   const [prompt, setPrompt] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(null);
 
-  const { selectedCharacters } = useCharacters(); // 
+  const { selectedCharacters, setSelectedCharacters } = useCharacters(); //
 
   const backgrounds = [
     {
@@ -24,29 +37,28 @@ function StoryPage() {
     },
   ];
 
-
   // Simulate loading characters from context/state
   useEffect(() => {
     // Replace this with real data loading logic
-    setCharacters(dummySelectedCharacters);
+    setSelectedCharacters(dummySelectedCharacters);
   }, []);
 
-const [generatedStory, setGeneratedStory] = useState("");
+  const [generatedStory, setGeneratedStory] = useState("");
 
-const handleGenerateStory = async () => {
-  try {
-    const story = await generateStory({
-      prompt,
-      characters: selectedCharacters,
-      background: selectedBackground,
-    });
+  const handleGenerateStory = async () => {
+    try {
+      const story = await generateStory({
+        prompt,
+        characters: selectedCharacters,
+        background: selectedBackground,
+      });
 
-    setGeneratedStory(story);
-  } catch (err) {
-    console.error("Error generating story:", err);
-    setGeneratedStory("An error occurred while generating the story.");
-  }
-};
+      setGeneratedStory(story);
+    } catch (err) {
+      console.error("Error generating story:", err);
+      setGeneratedStory("An error occurred while generating the story.");
+    }
+  };
 
   const handleSave = () => {
     console.log("Story saved!");
@@ -61,7 +73,7 @@ const handleGenerateStory = async () => {
   const handleReset = () => {
     setPrompt("");
     setSelectedBackground(null);
-    setCharacters(dummySelectedCharacters);
+    setSelectedCharacters(dummySelectedCharacters);
     console.log("Page reset!");
   };
 
@@ -144,12 +156,11 @@ const handleGenerateStory = async () => {
       )}
 
       {generatedStory && (
-  <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
-    <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
-    <p className="whitespace-pre-wrap">{generatedStory}</p>
-  </section>
-)}
-
+        <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
+          <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
+          <p className="whitespace-pre-wrap">{generatedStory}</p>
+        </section>
+      )}
 
       {/* Bottom Buttons */}
       <section className="mt-12 text-center space-x-4">
