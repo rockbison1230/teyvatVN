@@ -2,6 +2,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CharacterCard from "../components/CharacterCard.jsx";
+import { useCharacters } from "../context/CharacterContext";
+
+const { setSelectedCharacters } = useCharacters();
+
 
 // 🧠 Direct image imports (Vite will bundle them)
 

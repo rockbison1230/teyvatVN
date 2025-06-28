@@ -8,10 +8,14 @@ import CharacterPage from "./pages/CharacterPage.jsx";
 import TestScenePage from "./pages/TestScenePage"; // Make sure this file exists
 import PromptInputPage from "./pages/prompt_input_page.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import StoryPage from "./pages/StoryPage.jsx"; 
+
+import { CharacterProvider } from "./context/CharacterContext.jsx";
 
 function App() {
   return (
     <Router>
+      <CharacterProvider></CharacterProvider>
       <Routes>
         {/*
           The root path '/' initially shows the LoadingPage.
@@ -31,6 +35,7 @@ function App() {
         <Route path="/characters" element={<CharacterPage />} />
         <Route path="/generate" element={<PromptInputPage />} />
         <Route path="/login" element = {<LoginPage />}/>
+        <Route path="/story" element={<StoryPage/>} />
 
         {/* 404 fallback */}
         <Route
@@ -45,6 +50,7 @@ function App() {
           }
         />
       </Routes>
+      <CharacterProvider/>
     </Router>
   );
 }

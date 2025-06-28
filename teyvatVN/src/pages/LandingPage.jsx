@@ -14,17 +14,8 @@ function LandingPage() {
       </nav>
 
       {/* Hero */}
-<<<<<<< HEAD
-      <section className="text-center mt-4">
-        <img
-          className="text-center mt-4 bg-cover bg-center bg-no-repeat rounded-md px-6 py-16"
-  style={{ backgroundImage: 'url("..assets/background/landing-page-lcp.jpg")' }}
-        />
-        <h1 className="text-3xl mt-4 font-semibold">
-=======
       <section className="text-center mt-12">
         <h1 className="text-4xl font-bold mb-3">
->>>>>>> 5f4f12870f8f4e2c3e3ae53cedeea5c65e1bcd9f
           Your story. Their world. Any universe.
         </h1>
         <p className="text-lg text-gray-700 max-w-xl mx-auto mb-6">

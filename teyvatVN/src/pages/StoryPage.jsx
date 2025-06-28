@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
-
-// TEMP: Replace with real character data from global context or props
-const dummySelectedCharacters = [
-  { name: "Lumine", sprite_name: "lumine" },
-  { name: "Aether", sprite_name: "aether" },
-];
+import { useState } from "react";
+import { useCharacters } from "../context/CharacterContext"; // adjust path if needed
 
 function StoryPage() {
   const [prompt, setPrompt] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(null);
-  const [characters, setCharacters] = useState([]);
+
+  const { selectedCharacters } = useCharacters(); // 
 
   const backgrounds = [
     {
@@ -25,6 +21,7 @@ function StoryPage() {
       src: "/statue-of-seven-day.png",
     },
   ];
+
 
   // Simulate loading characters from context/state
   useEffect(() => {
@@ -118,7 +115,7 @@ function StoryPage() {
               className="w-full h-auto"
             />
             {/* Characters overlay */}
-            {characters.map((char, index) => (
+            {selectedCharacters.map((char, index) => (
               <img
                 key={index}
                 src={`/${char.sprite_name}.png`}
