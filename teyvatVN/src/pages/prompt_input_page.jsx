@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+
 export default function PromptInputPage() {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState(null);
+  const navigate = useNavigate();
+  
+    useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (!user) {
+    navigate("/login");
+    }
+    }, [navigate]);
+
 
   const handleGenerate = () => {
   const mockOutput = {
@@ -13,7 +26,7 @@ export default function PromptInputPage() {
     segments: [
       {
         type: "dialogue",
-        speaker: "CharacterA!",
+        speaker: "CharacterA",
         expression_action: "(smirking)",
         line: "We finally meet again.",
       },
