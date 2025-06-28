@@ -1,6 +1,8 @@
 import React from "react";
 import SegmentNavigator from "../components/SegmentNavigator";
 import scene from "../data/sample_scene.json";
+import fallbackScene from "../data/sample_scene.json";
+
 
 // Define the type structure (same as in SegmentNavigator)
 type Segment = {
@@ -12,6 +14,8 @@ type Segment = {
 };
 
 export default function TestScenePage() {
+  const saved = localStorage.getItem("latestResult");
+  const scene = saved ? JSON.parse(saved) : fallbackScene;
   const segments = scene.segments as Segment[]; // 👈 cast to expected type
 
   return (
@@ -20,7 +24,6 @@ export default function TestScenePage() {
       <p className="text-center italic text-gray-400 mb-6">
         {scene.setting_narration}
       </p>
-      <p>Hello!</p>  
       <SegmentNavigator segments={segments} />
     </div>
   );
