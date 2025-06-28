@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+}
+
+.story-container {
+  background-color: #f3f4f6;
+  color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+}
+
+.story-header {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.story-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.story-header p {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.prompt-section {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.prompt-input {
+  width: 100%;
+  max-width: 580px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.prompt-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.background-section {
+  margin-top: 3rem;
+}
+
+.background-options {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.background-card {
+  cursor: pointer;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border 0.3s ease;
+}
+
+.background-card.selected {
+  border-color: #4f46e5; /* Indigo-600 */
+}
+
+.background-card img {
+  width: 180px;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+
+.background-card-name {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.visual-novel-placeholder {
+  background-color: #d1d5db;
+  text-align: center;
+  padding: 4rem 0;
+  margin: 3rem auto;
+  width: 100%;
+  max-width: 640px;
+}
+
+.bottom-reset {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.bottom-reset a {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.25rem;
+}
+
+.bottom-reset svg {
+  display: inline;
+  vertical-align: middle;
+  margin-left: 4px;
+}

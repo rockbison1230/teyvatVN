@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCharacters } from "../context/CharacterContext"; 
 import { generateStory } from "../api/generateStory";
+import "./StoryPage.css";
 
 
 function StoryPage() {
@@ -25,7 +26,7 @@ function StoryPage() {
     },
     {
       name: "Mondstadt Night",
-      src: "/mondstadt-night.jpg",
+      src: "..assets/background/mondstadt-night.jpg",
     },
     {
       name: "Statue of the Seven",
