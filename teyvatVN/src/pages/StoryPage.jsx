@@ -150,7 +150,6 @@ const handleGenerateStory = async () => {
   </section>
 )}
 
-
       {/* Bottom Buttons */}
       <section className="mt-12 text-center space-x-4">
         <button
