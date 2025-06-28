@@ -60,7 +60,7 @@ const generateStoyApiCall = async () => {
     
 
     //send api call with these data as it is. todo later
-    await fetch("http://localhost:4000/api/dawn/chapter3", {
+    await fetch("https://script-deferred-sg-anthony.trycloudflare.com/api/dawn/chapter3", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
