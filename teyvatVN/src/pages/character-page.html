@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Character Selection</title>
+  <link rel="stylesheet" href="character-page.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <span class="logo">teyvat.vn</span>
+      <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#">Characters</a>
+        <a href="#">Story</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <h1>Characters</h1>
+      <p class="description">
+        Pick two characters to star in your story. Click a card to view their profile — then select your favorites to begin the journey.
+      </p>
+
+      <div class="top-bar">
+        <input type="text" placeholder="Search" id="searchInput" class="search-bar" />
+        <div class="selection-info">
+          <div id="selectedIcons" class="selected-icons"></div>
+          <span id="selectedCount">0/2</span>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="characterGrid" class="character-grid"></div>
+
+      <!-- Continue Prompt -->
+      <p class="continue-text">
+        Duo selected? Hit
+        <span id="continueBtn" class="continue-link">continue</span>
+        and let the adventure begin!
+      </p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      Built for <strong>GemiKnights</strong> 2025. Powered by Google Gemini.<br />
+      Quill pen SVG by
+      <a href="https://thenounproject.com/icon/quill-pen-3147689/" target="_blank" class="underline">Noun Project</a> (CC BY 3.0).
+    </footer>
+  </div>
+
+  <script src="character-page.js"></script>
+</body>
+</html>
