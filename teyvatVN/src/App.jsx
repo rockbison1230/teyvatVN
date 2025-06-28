@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LoadingPage from "./pages/LoadingPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
+import CharacterPage from "./pages/CharacterPage.jsx";
+
 import TestScenePage from "./pages/TestScenePage"; // Make sure this file exists
 import PromptInputPage from "./pages/prompt_input_page.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
         {/* Test route */}
         <Route path="/test_scene" element={<TestScenePage />} />
+        <Route path="/characters" element={<CharacterPage />} />
         <Route path="/generate" element={<PromptInputPage />} />
         <Route path="/login" element = {<LoginPage />}/>
 
