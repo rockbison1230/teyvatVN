@@ -1,0 +1,24 @@
+{
+  "title": "A Mysterious Encounter",
+  "characters": ["Luna", "Elias"],
+  "backgrounds": ["forest", "campfire"],
+  "setting_narration": "The fire crackles gently as shadows dance across the clearing.",
+  "segments": [
+    {
+      "type": "narration",
+      "text": "Leaves rustle as something stirs beyond the trees."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Luna",
+      "expression_action": "(nervously)",
+      "line": "Did you hear that?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Elias",
+      "expression_action": "(calmly unsheathes sword)",
+      "line": "Stay close. It might just be the wind."
+    }
+  ]
+}
