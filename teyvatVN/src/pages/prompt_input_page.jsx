@@ -5,28 +5,33 @@ export default function PromptInputPage() {
   const [result, setResult] = useState(null);
 
   const handleGenerate = () => {
-    // Simulate generation — replace with actual API call or logic later
-    const mockOutput = {
-      title: "Generated Scene Title",
-      characters: ["CharacterA", "CharacterB"],
-      backgrounds: ["Background1", "Background2"],
-      setting_narration: "A vivid scene description appears here.",
-      segments: [
-        {
-          type: "dialogue",
-          speaker: "CharacterA",
-          expression_action: "(smirking)",
-          line: "We finally meet again.",
-        },
-        {
-          type: "narration",
-          text: "The wind howls in the distance.",
-        },
-      ],
-    };
-
-    setResult(mockOutput);
+  const mockOutput = {
+    title: "Generated Scene Title",
+    characters: ["CharacterA", "CharacterB"],
+    backgrounds: ["Background1", "Background2"],
+    setting_narration: "A vivid scene description appears here.",
+    segments: [
+      {
+        type: "dialogue",
+        speaker: "CharacterA!",
+        expression_action: "(smirking)",
+        line: "We finally meet again.",
+      },
+      {
+        type: "narration",
+        text: "The wind howls in the distance.",
+      },
+    ],
   };
+
+  // 🔐 Save prompt and result to localStorage
+  localStorage.setItem("latestPrompt", prompt);
+  localStorage.setItem("latestResult", JSON.stringify(mockOutput));
+
+  setResult(mockOutput);
+};
+
+
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
