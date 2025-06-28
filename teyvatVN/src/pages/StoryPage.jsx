@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FiArrowRight, FiRefreshCcw } from "react-icons/fi";
 import "./StoryPage.css";
 import bg1 from "../assets/background/favonius-cathedral.jpg";
-import bg2 from "../assets/background/mondstadt-night.jpg";
+import bg2 from "../assets/background/mondstadt-night.webp";
 import bg3 from "../assets/background/statue-of-seven-day.png";
 
 function StoryPage() {
@@ -14,7 +14,9 @@ function StoryPage() {
   const [generatedStory, setGeneratedStory] = useState("");
 
   const navigate = useNavigate();
-  const { selectedCharacters } = useCharacters();
+  const charactersContext = useCharacters();
+  const selectedCharacters = charactersContext?.selectedCharacters || [];
+
   const character1 = localStorage.getItem("character1");
   const character2 = localStorage.getItem("character2");
 
@@ -38,7 +40,7 @@ const handleGenerateStory = async () => {
     setGeneratedStory("An error occurred while generating the story.");
   }
 };
-const generateStoyApiCall = async () => {
+const generateStoryApiCall = async () => {
     //setPrompt("");
     console.log("Story logging information so that it can do the api calls in the backend")
     console.log("prompt is ", prompt)
@@ -129,11 +131,10 @@ const generateStoyApiCall = async () => {
             {selectedCharacters.map((char, index) => (
               <img
                 key={index}
-                src={`/${char.sprite_name}.png`}
+                src={`/${char.sprite_name}`}
                 alt={char.name}
-                className={`absolute bottom-4 ${
-                  index === 0 ? "left-6" : "right-6"
-                } w-32 h-auto`}
+                className={`absolute bottom-4 ${index === 0 ? "left-6" : "right-6"} w-32 h-auto`}
+                style={{ zIndex: 10 }}
               />
             ))}
           </div>
