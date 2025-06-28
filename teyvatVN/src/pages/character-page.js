@@ -22,7 +22,7 @@ function renderCharacters(filter = "") {
       if (selected.includes(name)) card.classList.add("selected");
 
       const img = document.createElement("img");
-      img.src = `../assets/images/character sprites/${name}.webp`; // Updated path
+      img.src = `public/src/assets/character sprites/${name}.webp`;
       img.alt = name;
 
       const label = document.createElement("div");
@@ -53,7 +53,7 @@ function updateSelectionDisplay() {
   selectedIcons.innerHTML = "";
   selected.forEach(name => {
     const img = document.createElement("img");
-    img.src = `../assets/images/character sprites/${name}.webp`;
+    img.src = `/assets/character sprites/${name}.${getImageExtension(name)}`;
     img.alt = name;
     selectedIcons.appendChild(img);
   });
@@ -64,11 +64,16 @@ function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+function getImageExtension(name) {
+  const pngList = ["jean", "kaeya", "keqing", "sucrose"]; // Adjust if needed
+  return pngList.includes(name) ? "png" : "webp";
+}
+
 searchInput.addEventListener("input", () => renderCharacters(searchInput.value));
 continueBtn.addEventListener("click", () => {
   if (selected.length === 2) {
     alert("Continue to story with: " + selected.join(" & "));
-    // window.location.href = "story.html"; // uncomment when ready
+    // window.location.href = "story.html"; // Uncomment when ready
   }
 });
 
