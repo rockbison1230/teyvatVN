@@ -10,7 +10,7 @@ app = FastAPI()
 # Allow frontend to access this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5137"],  # your React app
+    allow_origins=["http://localhost:5137","https://updates-limitations-favors-effectively.trycloudflare.com", "*"],  # your React app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

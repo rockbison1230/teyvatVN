@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import LoadingPage from "./pages/LoadingPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import CharacterPage from "./pages/CharacterPage.jsx";
 
@@ -26,7 +25,7 @@ function App() {
 
         */}
           {/* Initial loading page */}
-          <Route path="/" element={<LoadingPage />} />
+          <Route path="/" element={<loading.html/>} />
           {/* Main landing */}
           <Route path="/landing" element={<LandingPage />} />
 
