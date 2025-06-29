@@ -148,25 +148,25 @@ export default function LandingPage() {
           <div className="team-grid">
             <div className="team-member">
               <img src={kaeyaImg} alt="Amana's character" />
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/rockbison1230" target="_blank" rel="noopener noreferrer">
                 Amana
               </a>
             </div>
             <div className="team-member">
               <img src={jeanImg} alt="Dawn's character" />
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/MsMarion" target="_blank" rel="noopener noreferrer">
                 Dawn
               </a>
             </div>
             <div className="team-member">
               <img src={keqingImg} alt="Lily's character" />
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.lsvrionis.dev/" target="_blank" rel="noopener noreferrer">
                 Lily
               </a>
             </div>
             <div className="team-member">
               <img src={sucroseImg} alt="Cami's character" />
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/protko-1103" target="_blank" rel="noopener noreferrer">
                 Cami
               </a>
             </div>
