@@ -24,20 +24,24 @@ import ventiCard from "../assets/character-sprites/venti.webp";
 // Story Sprites (for the story page)
 // You will need to create and add these new image files to your assets folder
 import kaeyaNeutral from "../assets/story-sprites/Kaeya-Neutral.png";
-import kaeyaSmirk from "../assets/story-sprites/Kaeya-Smirk.png"; // Example
 import jeanNeutral from "../assets/story-sprites/Jean-Neutral.png";
-import jeanHappy from "../assets/story-sprites/Jean-Happy.png"; // Example
+import dilucNeutral from "../assets/story-sprites/Kaeya-Neutral.png";
 
 // --- The Character Database ---
 // This object maps a character's name to all their data.
 export const characterDatabase = {
   // Each key MUST EXACTLY match the 'name' from your allCharacters array
+  Diluc: {
+    cardImage: dilucCard,
+    storySprites: {
+      Neutral: dilucNeutral,
+    },
+    // You can add other data like bio, element, etc. here in the future
+  },
   Kaeya: {
     cardImage: kaeyaCard,
     storySprites: {
       Neutral: kaeyaNeutral,
-      Smirking: kaeyaSmirk,
-      // You can add more moods here, e.g., Angry: kaeyaAngry
     },
     // You can add other data like bio, element, etc. here in the future
   },
@@ -45,7 +49,6 @@ export const characterDatabase = {
     cardImage: jeanCard,
     storySprites: {
       Neutral: jeanNeutral,
-      Happy: jeanHappy,
     },
   },
   Keqing: {
