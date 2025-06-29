@@ -20,15 +20,6 @@ import rosariaImg from "../assets/character-sprites/rosaria.webp";
 import sucroseImg from "../assets/character-sprites/sucrose.png";
 import ventiImg from "../assets/character-sprites/venti.webp";
 
-
-const handleOpenModal = (character) => {
-  setModalCharacter(character);
-};
-
-const handleCloseModal = () => {
-  setModalCharacter(null);
-};
-
 const allCharacters = [
   { name: "Albedo",
      image: albedoImg,
@@ -65,23 +56,16 @@ const allCharacters = [
     quote: "My thanks...and apology.",
   },
   { name: "Fischl", image: fischlImg },
-  { name: "Jean", 
-    image: jeanImg,
-  element: "Anemo",
-     personality: "Kind, Dedicated",
-     likes: ["Lisa", "Amber"],
-     dislikes: ["Diluc (sometimes)", "Barbara (sibling rivalry)"],
-     quote: "I must protect everyone." },
-  { 
-  name: "Kaeya",
-  image: kaeyaImg,
-  element: "Cryo",
-  personality: "Charming, Sly",
-  likes: ["Albedo", "Jean", "Eula"],
-  dislikes: ["Diluc"],
-  quote: "It’ll be more fun to go together."
-}
-,
+  { name: "Jean", image: jeanImg },
+  {
+    name: "Kaeya",
+    image: kaeyaImg,
+    element: "Cryo",
+    personality: "Charming, Sly",
+    likes: ["Albedo", "Jean", "Eula"],
+    dislikes: ["Diluc"],
+    quote: "It’ll be more fun to go together.",
+  },
   { name: "Keqing", image: keqingImg },
   { name: "Lisa", image: lisaImg },
   { name: "Mona", image: monaImg },
@@ -91,10 +75,12 @@ const allCharacters = [
   { name: "Venti", image: ventiImg },
 ];
 
-function CharacterPage() {
-  const [modalCharacter, setModalCharacter] = useState(null);
+export default function CharacterPage() {
+  // --- FIXED: All hooks and state-related functions are now inside the component ---
   const [selected, setSelected] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [modalCharacter, setModalCharacter] = useState(null);
+
   const navigate = useNavigate();
   const { setSelectedCharacters } = useCharacters();
 
@@ -114,6 +100,7 @@ function CharacterPage() {
     } else {
       alert("You can only select up to 2 characters.");
     }
+    handleCloseModal(); // Close modal after selection
   };
 
   const handleClearSearch = () => setSearchTerm("");
@@ -125,8 +112,6 @@ function CharacterPage() {
   const handleContinue = () => {
     if (selected.length === 2) {
       setSelectedCharacters(selected);
-      localStorage.setItem("character1", JSON.stringify(selected[0]));
-      localStorage.setItem("character2", JSON.stringify(selected[1]));
       navigate("/story");
     } else {
       alert("Please select exactly 2 characters to continue.");
@@ -141,7 +126,8 @@ function CharacterPage() {
     <div className="character-page-container">
       <h1 className="page-title">Characters</h1>
       <p className="page-description">
-        Pick two characters to star in your story. Click a card to view their profile — then select your favorites to begin the journey.
+        Pick two characters to star in your story. Click a card to view their
+        profile — then select your favorites to begin the journey.
       </p>
 
       <div className="topbar">
@@ -164,11 +150,18 @@ function CharacterPage() {
           {selected.map((char) => (
             <div key={char.name} className="selected-avatar">
               <img src={char.image} alt={char.name} />
-              <span onClick={() => handleDeselect(char.name)} className="deselect-x">×</span>
+              <span
+                onClick={() => handleDeselect(char.name)}
+                className="deselect-x"
+              >
+                ×
+              </span>
             </div>
           ))}
           <span className="selected-count">{selected.length}/2</span>
-          <button className="start-over" onClick={handleStartOver}>⟳</button>
+          <button className="start-over" onClick={handleStartOver}>
+            ⟳
+          </button>
         </div>
       </div>
 
@@ -176,7 +169,9 @@ function CharacterPage() {
         {filteredCharacters.map((char) => (
           <div
             key={char.name}
-            className={`character-card ${selected.find((c) => c.name === char.name) ? "selected" : ""}`}
+            className={`character-card ${
+              selected.find((c) => c.name === char.name) ? "selected" : ""
+            }`}
             onClick={() => handleOpenModal(char)}
           >
             <img src={char.image} alt={char.name} />
@@ -189,34 +184,50 @@ function CharacterPage() {
       {modalCharacter && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleCloseModal}>×</button>
+            <button className="modal-close" onClick={handleCloseModal}>
+              ×
+            </button>
             <h2 className="modal-name">{modalCharacter.name}</h2>
-            {modalCharacter.quote && <p className="modal-quote">“{modalCharacter.quote}”</p>}
-            {modalCharacter.element && <p><strong>Element:</strong> {modalCharacter.element}</p>}
-            {modalCharacter.personality && <p><strong>Personality:</strong> {modalCharacter.personality}</p>}
-            {modalCharacter.likes && <p>♡: {modalCharacter.likes.join(", ")}</p>}
-            {modalCharacter.dislikes && <p>⚔: {modalCharacter.dislikes.join(", ")}</p>}
-            <img className="modal-image" src={modalCharacter.image} alt={modalCharacter.name} />
-
-            {/* Select/Deselect Button */}
+            {modalCharacter.quote && (
+              <p className="modal-quote">“{modalCharacter.quote}”</p>
+            )}
+            {modalCharacter.element && (
+              <p>
+                <strong>Element:</strong> {modalCharacter.element}
+              </p>
+            )}
+            {modalCharacter.personality && (
+              <p>
+                <strong>Personality:</strong> {modalCharacter.personality}
+              </p>
+            )}
+            {modalCharacter.likes && (
+              <p>♡: {modalCharacter.likes.join(", ")}</p>
+            )}
+            {modalCharacter.dislikes && (
+              <p>⚔: {modalCharacter.dislikes.join(", ")}</p>
+            )}
+            <img
+              className="modal-image"
+              src={modalCharacter.image}
+              alt={modalCharacter.name}
+            />
             <button
-              className="modal-select-btn"
-              onClick={() => {
-                handleToggleSelection(modalCharacter);
-                handleCloseModal();
-              }}
+              className="select-button"
+              onClick={() => handleToggleSelection(modalCharacter)}
             >
-              {selected.find((c) => c.name === modalCharacter.name) ? "Deselect" : "Select"}
+              {selected.find((c) => c.name === modalCharacter.name)
+                ? "Deselect"
+                : "Select for Duo"}
             </button>
           </div>
         </div>
       )}
 
       <div className="continue">
-        Duo selected? Hit <span onClick={handleContinue}>continue</span> and let the adventure begin!
+        Duo selected? Hit <span onClick={handleContinue}>continue</span> and let
+        the adventure begin!
       </div>
     </div>
   );
 }
-
-export default CharacterPage;
