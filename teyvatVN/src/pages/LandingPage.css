@@ -397,3 +397,19 @@ body {
     transform: translateX(160%) translateY(8px);
   }
 }
+
+.how-to-image {
+  width: 100%;
+  max-width: 720px;
+  margin: 2rem auto;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

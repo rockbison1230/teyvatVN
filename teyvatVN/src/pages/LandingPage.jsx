@@ -15,6 +15,7 @@ import quillIcon from "../assets/images/quill.png";
 import dividerGif from "../assets/images/73310135223dfdf5bc92d661b554fc51.gif";
 import paimonFloat1 from "../assets/images/paimonFloat1.gif";
 import paimonFloat2 from "../assets/images/paimonFloat2.gif";
+import storyExample from '../assets/images/story-example.png';
 
 export default function LandingPage() {
   const videoRef = useRef(null);
@@ -117,9 +118,9 @@ export default function LandingPage() {
               </ol>
             </div>
 
-            <div className="how-to-placeholder">
-              <span>Screenshot of the story page in use</span>
-            </div>
+            <div className="how-to-image">
+          <img src={storyExample} alt="Screenshot of the story page in use" />
+          </div>
           </div>
         </section>
 
