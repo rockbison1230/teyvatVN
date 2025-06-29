@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiRefreshCcw } from "react-icons/fi";
 import "./StoryPage.css";
 
-// --- DYNAMIC IMPORTS ---
+// Assuming you have this context and data file set up
 import { useCharacters } from "../context/CharacterContext";
-import { characterDatabase } from "../data/characterData.js"; // Import our new database
+import { characterDatabase } from "../data/characterData.js";
 
-// Import general assets
+// Import your assets
 import quillIcon from "../assets/images/quill.png";
 import pageBg from "../assets/background/goodNews.jpg";
 import bg1 from "../assets/background/favonius-cathedral.jpg";
@@ -17,42 +17,15 @@ import bg3 from "../assets/background/statue-of-seven-day.png";
 export default function StoryPage() {
   const [prompt, setPrompt] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(null);
-
-  // State to hold the data objects for the two selected characters
-  const [char1Data, setChar1Data] = useState(null);
-  const [char2Data, setChar2Data] = useState(null);
-
-  // State to track the currently active sprite for each character
-  const [sprite1, setSprite1] = useState(null);
-  const [sprite2, setSprite2] = useState(null);
-
+  const [generatedStory, setGeneratedStory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  // This gets the selected character objects, e.g., [{name: 'Kaeya', ...}, {name: 'Jean', ...}]
+
   const { selectedCharacters } = useCharacters();
 
-  // This effect runs when the component loads to set up the dynamic data
+  // Redirect if no characters are selected
   useEffect(() => {
-    if (selectedCharacters && selectedCharacters.length === 2) {
-      // Get the full data objects from our database using the names from context
-      const firstCharData = characterDatabase[selectedCharacters[0].name];
-      const secondCharData = characterDatabase[selectedCharacters[1].name];
-
-      // Check if we found the data in our database
-      if (firstCharData && secondCharData) {
-        setChar1Data(firstCharData);
-        setChar2Data(secondCharData);
-
-        // Set the initial sprite to be the first one in their list (e.g., 'Neutral')
-        setSprite1(Object.values(firstCharData.storySprites)[0]);
-        setSprite2(Object.values(secondCharData.storySprites)[0]);
-      } else {
-        alert(
-          "Character data not found! Please check your characterData.js file."
-        );
-        navigate("/characters");
-      }
-    } else {
-      // If no characters are selected, redirect back to the selection page
+    if (!selectedCharacters || selectedCharacters.length < 2) {
       alert("Please select your characters first!");
       navigate("/characters");
     }
@@ -64,7 +37,22 @@ export default function StoryPage() {
     { name: "Statue of the Seven", src: bg3 },
   ];
 
-  // (Your handleGenerate, handleReset, etc. functions would go here)
+  const handleGenerate = async () => {
+    // ... API call logic would go here ...
+    console.log("Generating story...");
+  };
+
+  const handleReset = () => {
+    navigate("/characters");
+  };
+
+  const handleSave = () => {
+    if (!generatedStory) {
+      alert("There's no story to save!");
+      return;
+    }
+    console.log("Story Saved!", generatedStory);
+  };
 
   return (
     <div
@@ -82,7 +70,6 @@ export default function StoryPage() {
 
       <div className="story-content-container">
         <main className="story-content-wrapper">
-          {/* ... other sections like title, background selection ... */}
           <section className="story-title-section">
             <h1>Story</h1>
             <p>
@@ -119,80 +106,99 @@ export default function StoryPage() {
           >
             {!selectedBackground && <span>Visual novel UI</span>}
 
-            {/* Sprites are now rendered from dynamic state */}
-            {selectedBackground && sprite1 && (
-              <img
-                src={sprite1}
-                alt="Character 1"
-                className="character-sprite pos-1"
-              />
-            )}
-            {selectedBackground && sprite2 && (
-              <img
-                src={sprite2}
-                alt="Character 2"
-                className="character-sprite pos-2"
-              />
-            )}
+            {/* This now dynamically displays the correct story sprite */}
+            {selectedBackground &&
+              selectedCharacters &&
+              selectedCharacters.map((char, index) => {
+                // Look up the character in our database to get the correct story sprite
+                const charData = characterDatabase[char.name];
+                const storySprite = charData
+                  ? Object.values(charData.storySprites)[0]
+                  : char.image; // Fallback to card image
+
+                return (
+                  <img
+                    key={char.name}
+                    src={storySprite}
+                    alt={char.name}
+                    className={`character-sprite pos-${index + 1}`}
+                  />
+                );
+              })}
           </section>
 
-          {/* The Expression Switcher is now fully dynamic */}
-          {selectedBackground && (
-            <section className="expression-switcher">
-              {char1Data && (
-                <div className="character-controls">
-                  <h4>{selectedCharacters[0].name}'s Expression</h4>
-                  <div className="expression-buttons">
-                    {Object.entries(char1Data.storySprites).map(
-                      ([mood, src]) => (
-                        <button
-                          key={mood}
-                          className={`expression-btn ${
-                            sprite1 === src ? "active" : ""
-                          }`}
-                          onClick={() => setSprite1(src)}
-                        >
-                          {mood}
-                        </button>
-                      )
-                    )}
-                  </div>
-                </div>
-              )}
-              {char2Data && (
-                <div className="character-controls">
-                  <h4>{selectedCharacters[1].name}'s Expression</h4>
-                  <div className="expression-buttons">
-                    {Object.entries(char2Data.storySprites).map(
-                      ([mood, src]) => (
-                        <button
-                          key={mood}
-                          className={`expression-btn ${
-                            sprite2 === src ? "active" : ""
-                          }`}
-                          onClick={() => setSprite2(src)}
-                        >
-                          {mood}
-                        </button>
-                      )
-                    )}
-                  </div>
-                </div>
-              )}
-            </section>
-          )}
+          {/* Expression switcher has been removed */}
 
           <section className="story-prompt-section">
-            {/* ... prompt input ... */}
+            <h3>Write your Prompt</h3>
+            <div className="prompt-input-wrapper">
+              <input
+                type="text"
+                placeholder="e.g., A sudden rainstorm during a heated argument..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="prompt-input"
+              />
+              <button
+                onClick={handleGenerate}
+                className="prompt-submit-button"
+                disabled={isLoading}
+              >
+                <FiArrowRight />
+              </button>
+            </div>
+          </section>
+
+          {isLoading && (
+            <div className="loading-indicator">Generating your story...</div>
+          )}
+          {generatedStory && (
+            <pre className="story-output">{generatedStory}</pre>
+          )}
+
+          {/* Action buttons are back */}
+          <section className="action-buttons">
+            <button
+              onClick={handleSave}
+              className="action-button save"
+              disabled={!generatedStory || isLoading}
+            >
+              Save Story
+            </button>
           </section>
 
           <section className="reset-section">
-            {/* ... reset button ... */}
+            <h2>Want a fresh start?</h2>
+            <button onClick={handleReset} className="reset-button">
+              <span>Reset</span>
+              <FiRefreshCcw />
+            </button>
           </section>
         </main>
       </div>
 
-      <footer className="story-footer">{/* ... footer content ... */}</footer>
+      <footer className="story-footer">
+        <div className="story-footer-content">
+          <div className="footer-text">
+            <p>
+              Built for <strong>GemiKnights</strong> 2025. Powered by Google
+              Gemini.
+            </p>
+            <p>
+              Quill pen SVG by Kangrif from{" "}
+              <a
+                href="https://thenounproject.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Noun Project
+              </a>{" "}
+              (CC BY 3.0).
+            </p>
+          </div>
+          <img src={quillIcon} alt="Quill Icon" className="footer-quill" />
+        </div>
+      </footer>
     </div>
   );
 }
