@@ -105,12 +105,11 @@
 
 .character-grid {
   display: grid;
-  grid-template-columns: repeat(4, 90px);
-  row-gap: 2rem;
-  column-gap: 15rem;
-  justify-content: center;
-  margin-left: -10rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
 }
+
 
 .character-card {
   width: 200px;
@@ -165,112 +164,86 @@
   color: #74A6ED;
 }
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(30, 30, 30, 0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
+  z-index: 999;
 }
 
-/* Modal Content */
 .modal-content {
-  background-color: #fff;
+  background: white;
   border-radius: 12px;
-  width: 60%;
-  max-width: 700px;
+  width: 540px;
+  padding: 2rem 2rem 0 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   position: relative;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  font-family: "Quattrocento", sans-serif;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.modal-details {
+  flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-/* Modal Header (Stripe & Close button) */
-.modal-header {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: #D7DEF3; /* Stripe color */
-  padding: 100px;
-  border-radius: 12px 12px 0 0;
 }
 
 .modal-name {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
-  margin: 0;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-}
-
-/* Modal Body (Left and Right Sections) */
-.modal-body {
-  display: flex;
-  margin-top: 20px;
-}
-
-/* Left section for quote and qualities */
-.modal-left {
-  width: 55%;
-  text-align: left;
-  font-size: 0.9rem;
-  margin-right: 20px;
+  margin-bottom: 0.5rem;
+  color: #111;
 }
 
 .modal-quote {
   font-style: italic;
-  color: #666;
-  margin-bottom: 10px;
+  color: #444;
+  margin: 0.8rem 0 1.2rem;
+  font-size: 0.95rem;
 }
 
-.modal-left p {
-  margin-bottom: 10px;
-}
-
-/* Right section for character image */
-.modal-right {
-  width: 40%;
-  text-align: center;
+.modal-info {
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .modal-image {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+.modal-footer {
   width: 100%;
-  max-width: 150px;
-  border-radius: 8px;
+  background-color: #a7b7e4;
+  height: 28px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-top: 1.5rem;
 }
 
-/* Modal Footer Button */
-.modal-select-btn {
-  background-color: #A7B7E4; /* Select button color */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 1.5rem;
+  background: none;
   border: none;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 5px;
   cursor: pointer;
-  margin-top: 15px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  color: #777;
 }
-
-.modal-select-btn:hover {
-  background-color: #8fa3d6;
-}
-
