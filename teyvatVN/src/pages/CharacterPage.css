@@ -105,15 +105,14 @@
 
 .character-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1.5rem;
   justify-items: center;
 }
 
-
 .character-card {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   border: 1px solid #c7c3c3;
   border-radius: 6px;
   overflow: hidden;
@@ -122,11 +121,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.2s ease-in-out;
 }
 
+.character-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 .character-card.selected {
-  box-shadow: 0 0 0 3px #74A6ED;
+  box-shadow: 0 0 0 3px #74a6ed;
+  transform: translateY(-2px);
 }
 
 .character-card img {
@@ -139,7 +144,7 @@
 
 .character-name {
   background-color: #a7b7e4;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   padding: 2px 4px;
   text-align: center;
@@ -161,8 +166,10 @@
 }
 
 .continue span:hover {
-  color: #74A6ED;
+  color: #74a6ed;
 }
+
+/* --- MODAL STYLES --- */
 
 .modal-overlay {
   position: fixed;
@@ -178,72 +185,106 @@
 }
 
 .modal-content {
-  background: white;
+  background: #e8ebf2; /* Light blue-gray background from Figma */
   border-radius: 12px;
-  width: 540px;
-  padding: 2rem 2rem 0 2rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 540px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   position: relative;
   font-family: "Quattrocento", sans-serif;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: #d1d8e8;
+  border: 1px solid #bfc9e0;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.modal-body {
+  display: flex;
   gap: 1.5rem;
-  align-items: flex-start;
+  /* CHANGED: Align items to the center vertically */
+  align-items: center;
+  padding-bottom: 1.5rem;
 }
 
 .modal-details {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .modal-name {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
   color: #111;
 }
 
 .modal-quote {
   font-style: italic;
   color: #444;
-  margin: 0.8rem 0 1.2rem;
-  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+  font-size: 1rem;
+  border-left: 3px solid #6d7eb5;
+  padding-left: 1rem;
 }
 
 .modal-info {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #333;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
+}
+
+.modal-info p {
+  margin: 0;
+}
+.modal-info strong {
+  font-weight: 700;
 }
 
 .modal-image {
-  width: 130px;
-  height: 130px;
+  width: 160px;
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
-  margin-top: 0.5rem;
 }
 
 .modal-footer {
   width: 100%;
-  background-color: #a7b7e4;
-  height: 28px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #d1d8e8;
+  display: flex;
+  justify-content: center;
 }
 
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 1.5rem;
-  background: none;
+.select-button {
+  background-color: #6d7eb5;
+  color: white;
   border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-family: "Quattrocento", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  color: #777;
+  transition: background-color 0.2s;
+}
+
+.select-button:hover {
+  background-color: #5a6a9c;
 }
