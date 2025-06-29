@@ -1,172 +1,204 @@
-import { useState } from "react";
-import { useCharacters } from "../context/CharacterContext";
-import { generateStory } from "../api/generateStory";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiArrowRight, FiRefreshCcw } from "react-icons/fi";
+import "./StoryPage.css";
 
-function StoryPage() {
+// Assuming you have this context and data file set up
+import { useCharacters } from "../context/CharacterContext";
+import { characterDatabase } from "../data/characterData.js";
+
+// Import your assets
+import quillIcon from "../assets/images/quill.png";
+import pageBg from "../assets/background/goodNews.jpg";
+import bg1 from "../assets/background/favonius-cathedral.jpg";
+import bg2 from "../assets/background/mondstadt-night.webp";
+import bg3 from "../assets/background/statue-of-seven-day.png";
+
+export default function StoryPage() {
   const [prompt, setPrompt] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(null);
+  const [generatedStory, setGeneratedStory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const { selectedCharacters } = useCharacters(); //
+  const { selectedCharacters } = useCharacters();
 
-  console.log(selectedCharacters);
+  // Redirect if no characters are selected
+  useEffect(() => {
+    if (!selectedCharacters || selectedCharacters.length < 2) {
+      alert("Please select your characters first!");
+      navigate("/characters");
+    }
+  }, [selectedCharacters, navigate]);
 
   const backgrounds = [
-    {
-      name: "Favonius Cathedral",
-      src: "/favonius-cathedral.jpg",
-    },
-    {
-      name: "Mondstadt Night",
-      src: "/mondstadt-night.jpg",
-    },
-    {
-      name: "Statue of the Seven",
-      src: "/statue-of-seven-day.png",
-    },
+    { name: "Favonius Cathedral", src: bg1 },
+    { name: "Mondstadt Night", src: bg2 },
+    { name: "Statue of the Seven", src: bg3 },
   ];
 
-  const [generatedStory, setGeneratedStory] = useState("");
-
-  const handleGenerateStory = async () => {
-    try {
-      const story = await generateStory({
-        prompt,
-        characters: selectedCharacters,
-        background: selectedBackground,
-      });
-
-      setGeneratedStory(story);
-    } catch (err) {
-      console.error("Error generating story:", err);
-      setGeneratedStory("An error occurred while generating the story.");
-    }
-  };
-
-  const handleSave = () => {
-    console.log("Story saved!");
-    // Implement save logic here
-  };
-
-  const handleClear = () => {
-    setPrompt("");
-    console.log("Story cleared!");
+  const handleGenerate = async () => {
+    // ... API call logic would go here ...
+    console.log("Generating story...");
   };
 
   const handleReset = () => {
-    setPrompt("");
-    setSelectedBackground(null);
-    setCharacters(dummySelectedCharacters);
-    console.log("Page reset!");
+    navigate("/characters");
+  };
+
+  const handleSave = () => {
+    if (!generatedStory) {
+      alert("There's no story to save!");
+      return;
+    }
+    console.log("Story Saved!", generatedStory);
   };
 
   return (
-    <div className="bg-gray-100 text-black min-h-screen px-6 pb-12">
-      {/* Title */}
-      <header className="pt-6">
-        <h1 className="text-3xl font-semibold text-center">Story</h1>
+    <div
+      className="story-page-container"
+      style={{ backgroundImage: `url(${pageBg})` }}
+    >
+      <header className="story-page-header">
+        <div className="logo">teyvat.vn</div>
+        <nav className="story-nav-links">
+          <Link to="/landing">Home</Link>
+          <Link to="/characters">Characters</Link>
+          <Link to="/story">Story</Link>
+        </nav>
       </header>
 
-      {/* Prompt Input */}
-      <section className="mt-6 text-center">
-        <input
-          type="text"
-          placeholder="Enter your story prompt..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          className="w-full max-w-xl px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-        {selectedBackground && (
-          <button
-            onClick={handleGenerateStory}
-            className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-          >
-            Go!
-          </button>
-        )}
-      </section>
+      <div className="story-content-container">
+        <main className="story-content-wrapper">
+          <section className="story-title-section">
+            <h1>Story</h1>
+            <p>
+              Here’s where the magic happens. Drop your duo anywhere you want.
+              Mondstadt? College? Outer space? It’s your story — you decide!
+            </p>
+          </section>
 
-      {/* Background Selection */}
-      <section className="mt-10">
-        <h2 className="text-xl font-bold text-center mb-4">
-          Choose Your Background
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {backgrounds.map((bg, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedBackground(bg.src)}
-              className={`cursor-pointer rounded overflow-hidden border-4 ${
-                selectedBackground === bg.src
-                  ? "border-indigo-500"
-                  : "border-transparent"
-              }`}
-            >
-              <img
-                src={bg.src}
-                alt={bg.name}
-                className="w-full h-48 object-cover hover:opacity-80 transition"
-              />
-              <div className="text-center py-2 text-sm">{bg.name}</div>
+          <section className="background-selection-section">
+            <h3>Choose a Background</h3>
+            <div className="background-grid">
+              {backgrounds.map((bg) => (
+                <div
+                  key={bg.name}
+                  className={`background-card ${
+                    selectedBackground?.name === bg.name ? "selected" : ""
+                  }`}
+                  onClick={() => setSelectedBackground(bg)}
+                >
+                  <img src={bg.src} alt={bg.name} />
+                  <span>{bg.name}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      {/* Preview Section */}
-      {selectedBackground && (
-        <section className="mt-10 text-center">
-          <h3 className="text-lg font-semibold mb-4">Background Preview</h3>
-          <div className="relative inline-block max-w-full rounded overflow-hidden shadow-lg">
-            <img
-              src={selectedBackground}
-              alt="Selected background"
-              className="w-full h-auto"
-            />
-            {/* Characters overlay */}
-            {selectedCharacters.map((char, index) => (
-              <img
-                key={index}
-                src={`/${char.sprite_name}.png`}
-                alt={char.name}
-                className={`absolute bottom-4 ${
-                  index === 0 ? "left-10" : "right-10"
-                } w-32 h-auto`}
+          <section
+            className="visual-novel-ui"
+            style={{
+              backgroundImage: selectedBackground
+                ? `url(${selectedBackground.src})`
+                : "none",
+            }}
+          >
+            {!selectedBackground && <span>Visual novel UI</span>}
+
+            {/* This now dynamically displays the correct story sprite */}
+            {selectedBackground &&
+              selectedCharacters &&
+              selectedCharacters.map((char, index) => {
+                // Look up the character in our database to get the correct story sprite
+                const charData = characterDatabase[char.name];
+                const storySprite = charData
+                  ? Object.values(charData.storySprites)[0]
+                  : char.image; // Fallback to card image
+
+                return (
+                  <img
+                    key={char.name}
+                    src={storySprite}
+                    alt={char.name}
+                    className={`character-sprite pos-${index + 1}`}
+                  />
+                );
+              })}
+          </section>
+
+          {/* Expression switcher has been removed */}
+
+          <section className="story-prompt-section">
+            <h3>Write your Prompt</h3>
+            <div className="prompt-input-wrapper">
+              <input
+                type="text"
+                placeholder="e.g., A sudden rainstorm during a heated argument..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="prompt-input"
               />
-            ))}
+              <button
+                onClick={handleGenerate}
+                className="prompt-submit-button"
+                disabled={isLoading}
+              >
+                <FiArrowRight />
+              </button>
+            </div>
+          </section>
+
+          {isLoading && (
+            <div className="loading-indicator">Generating your story...</div>
+          )}
+          {generatedStory && (
+            <pre className="story-output">{generatedStory}</pre>
+          )}
+
+          {/* Action buttons are back */}
+          <section className="action-buttons">
+            <button
+              onClick={handleSave}
+              className="action-button save"
+              disabled={!generatedStory || isLoading}
+            >
+              Save Story
+            </button>
+          </section>
+
+          <section className="reset-section">
+            <h2>Want a fresh start?</h2>
+            <button onClick={handleReset} className="reset-button">
+              <span>Reset</span>
+              <FiRefreshCcw />
+            </button>
+          </section>
+        </main>
+      </div>
+
+      <footer className="story-footer">
+        <div className="story-footer-content">
+          <div className="footer-text">
+            <p>
+              Built for <strong>GemiKnights</strong> 2025. Powered by Google
+              Gemini.
+            </p>
+            <p>
+              Quill pen SVG by Kangrif from{" "}
+              <a
+                href="https://thenounproject.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Noun Project
+              </a>{" "}
+              (CC BY 3.0).
+            </p>
           </div>
-        </section>
-      )}
-
-      {generatedStory && (
-        <section className="mt-10 max-w-3xl mx-auto bg-white p-4 rounded shadow">
-          <h3 className="text-xl font-semibold mb-2">Generated Story</h3>
-          <p className="whitespace-pre-wrap">{generatedStory}</p>
-        </section>
-      )}
-
-      {/* Bottom Buttons */}
-      <section className="mt-12 text-center space-x-4">
-        <button
-          onClick={handleSave}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Save Story
-        </button>
-        <button
-          onClick={handleClear}
-          className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-        >
-          Clear Prompt
-        </button>
-        <button
-          onClick={handleReset}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-        >
-          Reset Page
-        </button>
-      </section>
+          <img src={quillIcon} alt="Quill Icon" className="footer-quill" />
+        </div>
+      </footer>
     </div>
   );
 }
-
-export default StoryPage;

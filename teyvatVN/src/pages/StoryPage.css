@@ -5,10 +5,6 @@
   box-sizing: border-box;
 }
 
-.fade-in {
-  animation: fadeIn 1s ease forwards;
-  opacity: 0;
-}
 /* Page Container with Background Image */
 .story-page-container {
   display: flex;
@@ -58,7 +54,6 @@
 /* White Content Container */
 .story-content-container {
   width: 100%;
-  /* CHANGED: Increased top/bottom padding to push the container down */
   padding: 6rem 2rem;
   flex-grow: 1;
 }
@@ -68,7 +63,6 @@
   border-radius: 1.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   padding: 3rem 4rem;
-  /* CHANGED: Reduced max-width to make the container smaller */
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -151,6 +145,81 @@
   font-size: 0.9rem;
 }
 
+/* Visual Novel UI Placeholder */
+.visual-novel-ui {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: #f3f4f6;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 1.25rem;
+  margin: 2rem auto 0;
+  max-width: 1100px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.character-sprite {
+  position: absolute;
+  bottom: 0;
+  height: 105%;
+  max-width: 350px;
+  object-fit: contain;
+}
+.character-sprite.pos-1 {
+  left: 5%;
+}
+.character-sprite.pos-2 {
+  right: 5%;
+  transform: scaleX(-1);
+}
+
+/* Expression Switcher Styles */
+.expression-switcher {
+  display: flex;
+  justify-content: space-around;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 1rem;
+  max-width: 800px;
+  margin: 1rem auto 3rem;
+}
+.character-controls {
+  text-align: center;
+}
+.character-controls h4 {
+  margin: 0 0 1rem;
+  font-weight: bold;
+}
+.expression-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+.expression-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.expression-btn:hover {
+  background-color: #eef2ff;
+  border-color: #c7d2fe;
+}
+.expression-btn.active {
+  background-color: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+  font-weight: bold;
+}
+
 /* Prompt Input Section */
 .story-prompt-section {
   width: 100%;
@@ -187,41 +256,6 @@
   font-size: 1.5rem;
   color: #9ca3af;
   cursor: pointer;
-}
-
-/* Visual Novel UI Placeholder */
-.visual-novel-ui {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  background-color: #f3f4f6;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9ca3af;
-  font-size: 1.25rem;
-  margin: 2rem auto 2rem;
-  max-width: 1100px;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-}
-
-.character-sprite {
-  position: absolute;
-  bottom: -20px;
-  height: 90%;
-  max-width: 300px;
-  object-fit: contain;
-}
-.character-sprite.pos-1 {
-  left: 5%;
-}
-.character-sprite.pos-2 {
-  right: 5%;
-  transform: scaleX(-1);
 }
 
 /* API Result Styles */
