@@ -23,9 +23,9 @@ import ventiCard from "../assets/character-sprites/venti.webp";
 
 // Story Sprites (for the story page)
 // You will need to create and add these new image files to your assets folder
-import kaeyaNeutral from "../assets/story-sprites/Kaeya-Neutral.png";
-import jeanNeutral from "../assets/story-sprites/Jean-Neutral.png";
-import dilucNeutral from "../assets/story-sprites/Kaeya-Neutral.png";
+import kaeyaNeutral from "../assets/character-sprites/Kaeya-Neutral.png";
+import jeanNeutral from "../assets/character-sprites/Jean-Neutral.png";
+import dilucNeutral from "../assets/character-sprites/Diluc-Neutral.png";
 
 // --- The Character Database ---
 // This object maps a character's name to all their data.
