@@ -143,7 +143,9 @@ const allCharacters = [
    },
 ];
 
+
 export default function CharacterPage() {
+  
   // --- FIXED: All hooks and state-related functions are now inside the component ---
   const [selected, setSelected] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -191,7 +193,9 @@ export default function CharacterPage() {
   );
 
   return (
+    
     <div className="character-page-container">
+      
       <h1 className="page-title">Characters</h1>
       <p className="page-description">
         Pick two characters to star in your story. Click a card to view their
