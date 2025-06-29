@@ -46,8 +46,22 @@ const allCharacters = [
      dislikes: ["Rosaria (conflicting attitudes)"],
      quote: "When I'm teaching you to glide, I feel like I can go even faster than usual..."},
   
-     { name: "Barbara", image: barbaraImg },
-  { name: "Dahlia", image: dahliaImg },
+     { name: "Barbara", 
+      image: barbaraImg,
+      element: "Hydro",
+      personality: "Optimistic, Caring",
+      likes: ["Jean", "Noelle"],
+      dislikes: ["Rosaria (clashes with her worldview)"],
+      quote:  "Tada! Barbara is here~ Leave the healing to me!"},
+    
+      { name: "Dahlia", 
+        image: dahliaImg,
+        element: "Hydro",
+       personality: "Graceful, Kind",
+        likes: ["Barbara", "Lisa"],
+        dislikes: ["Diluc (finds him too cold)"],
+        quote: "My music heals the souls of all who listen." },
+
   { name: "Diluc",
      image: dilucImg,
      element: "Pyro",
@@ -64,8 +78,16 @@ const allCharacters = [
     dislikes: ["Diluc"],
     quote: "My thanks...and apology.",
   },
-  { name: "Fischl", image: fischlImg },
-  { name: "Jean", 
+
+  { name: "Fischl", 
+    image: fischlImg,
+    element: "Electro",
+     personality: "Dramatic, Imaginative",
+     likes: ["Sucrose", "Mona"],
+     dislikes: ["Rosaria (doesn't take her theatrics seriously)"],
+     quote: "I am Oz, the eternal Night Raven." },
+  
+     { name: "Jean", 
     image: jeanImg,
   element: "Anemo",
      personality: "Kind, Dedicated",
@@ -80,15 +102,54 @@ const allCharacters = [
   likes: ["Albedo", "Jean", "Eula"],
   dislikes: ["Diluc"],
   quote: "It’ll be more fun to go together."
-}
-,
-  { name: "Keqing", image: keqingImg },
-  { name: "Lisa", image: lisaImg },
-  { name: "Mona", image: monaImg },
-  { name: "Noelle", image: noelleImg },
-  { name: "Rosaria", image: rosariaImg },
-  { name: "Sucrose", image: sucroseImg },
-  { name: "Venti", image: ventiImg },
+},
+  { name: "Lisa", image: lisaImg,
+    element: "Electro",
+     personality: "Smart, Flirtatious",
+     likes: ["Kaeya", "Mona"],
+     dislikes: ["Venti (too lazy for her taste)"],
+     quote: "A good library is a treasure to be enjoyed..."
+   },
+
+  { name: "Mona", image: monaImg,
+    element: "Hydro",
+     personality: "Proud, Insightful",
+     likes: ["Albedo", "Fischl"],
+     dislikes: ["Kaeya (doesn't trust his motives)"],
+     quote: "I'll see what the stars have in store for you."
+   },
+
+  { name: "Noelle", image: noelleImg,
+    element: "Geo",
+     personality: "Hardworking, Loyal",
+     likes: ["Jean", "Barbara"],
+     dislikes: ["Kaeya (too laid-back for her)"],
+     quote: "Such fair weather. Why don't we do a bit of sunny work?"
+   },
+
+  { name: "Rosaria", image: rosariaImg,
+    element: "Cryo",
+     personality: "Blunt, Private",
+     likes: ["Eula", "Kaeya"],
+     dislikes: ["Barbara, Amber"],
+     quote: "Let's forgo the formalities. I'm here to finish a job."
+   },
+
+  { name: "Sucrose", image: sucroseImg,
+    element: "Anemo",
+     personality: "Shy, Intelligent",
+     likes: ["Albedo", "Fischl"],
+     dislikes: ["Lisa (intimidated by her)"],
+     quote: "Let's begin the experiment!"
+   },
+
+  { name: "Venti", image: ventiImg,
+    element: "Anemo",
+     personality: "Playful, Free-spirited",
+     likes: ["Amber", "Fischl"],
+     dislikes: ["Lisa (doesn't enjoy her nagging)"],
+     quote: "Winds will guide you on your journey."
+   },
 ];
 
 function CharacterPage() {
